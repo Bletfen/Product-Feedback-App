@@ -3,11 +3,13 @@ import SortFilter from "../components/SortFilter";
 import {
   useDataContext,
   useFilterContext,
+  useUpVoteHandler,
 } from "../context/SuggestionsContext";
 import MainHeader from "../components/MainHeader";
 export default function Suggestions() {
   const { data } = useDataContext();
   const { filter } = useFilterContext();
+  const { upVoteHandler, upVotedIds } = useUpVoteHandler();
   const [sort, setSort] = useState<string>("Most Upvotes");
   const [sortIsOpen, setSortIsOpen] = useState<boolean>(false);
   const FilteredData = data.productRequests.filter((item) => {
@@ -31,6 +33,7 @@ export default function Suggestions() {
         return 0;
     }
   });
+
   return (
     <div>
       <MainHeader
@@ -93,10 +96,16 @@ export default function Suggestions() {
             </div>
             <div className="flex justify-between items-center">
               <div
-                className="flex items-center gap-[1rem]
-                pl-[1.6rem] pr-[1.3rem] py-[0.7rem]
-                bg-[#f2f4f3] rounded-[1rem]
-                cursor-pointer"
+                className={`flex items-center gap-[1rem]
+                pl-[1.6rem] pr-[1.3rem] py-[0.7rem] rounded-[1rem]
+                cursor-pointer hover:bg-[#cfd7ff]
+                transition-all duration-300
+                ${
+                  upVotedIds.includes(suggestion.id)
+                    ? "bg-[#4661e6]"
+                    : "bg-[#f2f4f3]"
+                }`}
+                onClick={() => upVoteHandler(suggestion.id)}
               >
                 <svg
                   width="9"
@@ -104,12 +113,22 @@ export default function Suggestions() {
                   viewBox="0 0 9 7"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className={`${
+                    upVotedIds.includes(suggestion.id)
+                      ? "stroke-white"
+                      : "stroke-[#4661E6]"
+                  }`}
                 >
-                  <path d="M0 6L4 2L8 6" stroke="#4661E6" strokeWidth="2" />
+                  <path d="M0 6L4 2L8 6" strokeWidth="2" />
                 </svg>
                 <span
-                  className="text-[1.3rem] font-bold
-                  tracking-[-0.181px] text-[#3a4374]"
+                  className={`text-[1.3rem] font-bold
+                  tracking-[-0.181px]
+                  ${
+                    upVotedIds.includes(suggestion.id)
+                      ? "text-white"
+                      : "text-[#3a4374]"
+                  }`}
                 >
                   {suggestion.upvotes}
                 </span>

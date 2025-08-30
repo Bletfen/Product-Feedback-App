@@ -9,9 +9,14 @@ interface IFilterByCategory {
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
+interface IUpVoteHandler {
+  upVoteHandler: (targetId: number) => void;
+  upVotedIds: number[];
+}
 
 const DataContext = createContext<IDataContext | undefined>(undefined);
 const FilterContext = createContext<IFilterByCategory | undefined>(undefined);
+const UpVoteContext = createContext<IUpVoteHandler | undefined>(undefined);
 
 export default function SuggestionsContext({
   children,
@@ -20,9 +25,33 @@ export default function SuggestionsContext({
 }) {
   const [data, setData] = useState<IData>(dataBase);
   const [filter, setFilter] = useState<string>("All");
+  const [upVotedIds, setUpVotedIds] = useState<number[]>([]);
+  const upVoteHandler = (targetId: number) => {
+    if (upVotedIds.includes(targetId)) {
+      setData((prev) => ({
+        ...prev,
+        productRequests: prev.productRequests.map((req) =>
+          req.id === targetId ? { ...req, upvotes: req.upvotes - 1 } : req
+        ),
+      }));
+      setUpVotedIds((prev) => prev.filter((id) => id !== targetId));
+    } else {
+      setData((prev) => ({
+        ...prev,
+        productRequests: prev.productRequests.map((req) =>
+          req.id === targetId ? { ...req, upvotes: req.upvotes + 1 } : req
+        ),
+      }));
+      setUpVotedIds((prev) => [...prev, targetId]);
+    }
+  };
   return (
     <DataContext.Provider value={{ data, setData }}>
-      <FilterContext value={{ filter, setFilter }}>{children}</FilterContext>
+      <FilterContext.Provider value={{ filter, setFilter }}>
+        <UpVoteContext.Provider value={{ upVoteHandler, upVotedIds }}>
+          {children}
+        </UpVoteContext.Provider>
+      </FilterContext.Provider>
     </DataContext.Provider>
   );
 }
@@ -39,6 +68,14 @@ export function useFilterContext() {
   const context = useContext(FilterContext);
   if (!context) {
     throw new Error("FilterContext must be used within a SuggestionsProvider");
+  }
+  return context;
+}
+
+export function useUpVoteHandler() {
+  const context = useContext(UpVoteContext);
+  if (!context) {
+    throw new Error("UpVoteContext must be used within a SuggestionsProvider");
   }
   return context;
 }
