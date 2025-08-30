@@ -4,6 +4,7 @@ import {
   useDataContext,
   useFilterContext,
 } from "../context/SuggestionsContext";
+import MainHeader from "../components/MainHeader";
 export default function Suggestions() {
   const { data } = useDataContext();
   const { filter } = useFilterContext();
@@ -16,14 +17,13 @@ export default function Suggestions() {
   });
   return (
     <div>
-      <div className="px-[2.4rem] py-[0.8rem] bg-[#373f68]">
-        <div onClick={() => setSortIsOpen((prev) => !prev)}>
-          <p>
-            <span>Sort By : </span> {sort}
-          </p>
-          {sortIsOpen ? <SortFilter setSort={setSort} /> : null}
-        </div>
-      </div>
+      <MainHeader
+        setSortIsOpen={setSortIsOpen}
+        sortIsOpen={sortIsOpen}
+        sort={sort}
+      >
+        <SortFilter setSort={setSort} />
+      </MainHeader>
     </div>
   );
 }
