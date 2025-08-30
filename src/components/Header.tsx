@@ -1,10 +1,12 @@
 import { useState } from "react";
 import FilterByCategory from "./FilterByCategory";
 import Roadmap from "./Roadmap";
+import { useSort } from "../context/FeedBacksContext";
 export default function Header() {
+  const { setSortIsOpen } = useSort();
   const [isHamburgerMenu, setIsHamburgerMenu] = useState<boolean>(false);
   return (
-    <div className="relative">
+    <div className="relative" onClick={() => setSortIsOpen(false)}>
       <div
         className="bg-[radial-gradient(166.82%_166.82%_at_103.9%_-10.39%,_#E84D70_0%,_#A337F6_53.09%,_#28A7ED_100%)]
       flex items-center justify-between py-[1.6rem] px-[2.4rem]"

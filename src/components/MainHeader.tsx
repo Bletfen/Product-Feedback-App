@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import AddFeedBackButton from "./AddFeedBackButton";
 
 export default function MainHeader({
   setSortIsOpen,
@@ -37,13 +38,7 @@ export default function MainHeader({
         </div>
         {sortIsOpen ? children : null}
       </div>
-      <button
-        className="px-[1.7rem] py-[1.05rem] text-[1.3rem]
-              font-bold text-[#f2f4fe] bg-[#ad1fea] rounded-[1rem]
-              cursor-pointer"
-      >
-        + Add Feedback
-      </button>
+      <AddFeedBackButton />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useFilterContext } from "../context/SuggestionsContext";
+import { useFilterContext } from "../context/FeedBacksContext";
 export default function FilterByCategory() {
   const categoryArray: string[] = [
     "All",
