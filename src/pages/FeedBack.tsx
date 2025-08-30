@@ -31,6 +31,25 @@ export default function FeedBack() {
         </Link>
       </div>
       {feed && <FeedBackCard feedback={feed} />}
+      <div className="bg-white rounded-[1rem] p-[2.4rem]">
+        <h1
+          className="text-[#3a4374] text-[1.8rem] font-bold
+          tracking-[-0.25px] mb-[2.4rem]"
+        >
+          {feed?.comments?.length} Comments
+        </h1>
+        <div>
+          {feed?.comments?.map((com) => (
+            <div>
+              <img src={com.user.image} alt="user-img" />
+              <div>
+                <h2>{com.user.name}</h2>
+                <p>{com.user.username}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
