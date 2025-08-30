@@ -15,6 +15,22 @@ export default function Suggestions() {
       ? true
       : item.category.toLowerCase() === filter.toLocaleLowerCase();
   });
+  const finalData = FilteredData.sort((a, b) => {
+    const commentsA = a.comments?.length ?? 0;
+    const commentsB = b.comments?.length ?? 0;
+    switch (sort.toLowerCase()) {
+      case "most upvotes":
+        return b.upvotes - a.upvotes;
+      case "least upvotes":
+        return b.upvotes - a.upvotes;
+      case "most comments":
+        return commentsB - commentsA;
+      case "least comments":
+        return commentsA - commentsB;
+      default:
+        return 0;
+    }
+  });
   return (
     <div>
       <MainHeader
@@ -22,8 +38,13 @@ export default function Suggestions() {
         sortIsOpen={sortIsOpen}
         sort={sort}
       >
-        <SortFilter setSort={setSort} />
+        <SortFilter
+          setSort={setSort}
+          sort={sort}
+          setSortIsOpen={setSortIsOpen}
+        />
       </MainHeader>
+      {finalData.map((item) => item.id)}
     </div>
   );
 }

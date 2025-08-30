@@ -1,7 +1,11 @@
 export default function SortFilter({
   setSort,
+  sort,
+  setSortIsOpen,
 }: {
   setSort: React.Dispatch<React.SetStateAction<string>>;
+  sort: string;
+  setSortIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const sortArray = [
     "Most Upvotes",
@@ -21,12 +25,34 @@ export default function SortFilter({
           className="flex flex-col gap-[1.2rem]"
           onClick={() => setSort(item)}
         >
-          <p
-            className="px-[2.4rem]
-            text-[1.6rem] text-[#647196]"
+          <div
+            className="flex items-center justify-between
+          px-[2.4rem] group cursor-pointer"
+            onClick={() => setSortIsOpen(false)}
           >
-            {item}
-          </p>
+            <p
+              className={`text-[1.6rem] ${
+                sort === item ? "text-[#ad1fea]" : "text-[#647196]"
+              } transition-all duration-300 group-hover:text-[#ad1fea]`}
+            >
+              {item}
+            </p>
+            {sort === item ? (
+              <svg
+                width="13"
+                height="10"
+                viewBox="0 0 13 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.96875 4.85894L4.50044 8.39062L12.0004 0.890625"
+                  stroke="#AD1FEA"
+                  stroke-width="2"
+                />
+              </svg>
+            ) : null}
+          </div>
           {sortArray.length > index + 1 ? (
             <div className="w-full h-px bg-[#3a4374]/15"></div>
           ) : null}
