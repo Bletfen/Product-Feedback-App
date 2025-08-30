@@ -6,6 +6,7 @@ import Layout from "./layout/Layout";
 import Suggestion from "./pages/Suggestion";
 import ManipulateSuggestion from "./pages/ManipulateSuggestion";
 import RoadMapPage from "./pages/RoadMapPage";
+import SuggestionsContext from "./context/SuggestionsContext";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <SuggestionsContext>
+      <RouterProvider router={router} />
+    </SuggestionsContext>
   </StrictMode>
 );

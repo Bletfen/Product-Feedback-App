@@ -1,10 +1,37 @@
 import { Link } from "react-router-dom";
-
+import { useDataContext } from "../context/SuggestionsContext";
 export default function Roadmap() {
+  const { data } = useDataContext();
+  const plannedLenght = data.productRequests.filter(
+    (product) => product.status === "planned"
+  ).length;
+  const inProggressLength = data.productRequests.filter(
+    (product) => product.status === "in-progress"
+  ).length;
+  const liveLength = data.productRequests.filter(
+    (product) => product.status === "live"
+  ).length;
+  const roadMapArray = [
+    {
+      label: "Planned",
+      color: "#f49f85",
+      length: plannedLenght,
+    },
+    {
+      label: "In-Progress",
+      color: "#ad1fea",
+      length: inProggressLength,
+    },
+    {
+      label: "Live",
+      color: "#62bcfa",
+      length: liveLength,
+    },
+  ];
   return (
     <div
       className="px-[2.4rem] pt-[1.9rem] pb-[2.4rem] bg-white 
-    rounded-[1rem]
+    rounded-[1rem] flex flex-col gap-[2.4rem]
     "
     >
       <div className="flex items-center gap-[6.7rem]">
@@ -22,12 +49,24 @@ export default function Roadmap() {
           View
         </Link>
       </div>
-      <div>
-        <div>
-          <div className="w-[0.8rem] h-[0.8rem] rounded bg-[#f49f85]"></div>
-        </div>
-        <div></div>
-        <div></div>
+      <div
+        className="flex flex-col gap-[0.8rem]
+        text-[1.6rem] text-[#647196]"
+      >
+        {roadMapArray.map((item) => (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-[1.6rem]">
+              <div
+                className="w-[0.8rem] h-[0.8rem] rounded-full"
+                style={{ backgroundColor: item.color }}
+              ></div>
+              <p>{item.label}</p>
+            </div>
+            <div>
+              <span>{item.length}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
