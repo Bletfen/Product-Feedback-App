@@ -1,3 +1,3 @@
-export default function ManipulateSuggestion() {
+export default function ManipulateFeedBack() {
   return <div>ManipulateSuggestion</div>;
 }

@@ -23,7 +23,7 @@ const FilterContext = createContext<IFilterByCategory | undefined>(undefined);
 const UpVoteContext = createContext<IUpVoteHandler | undefined>(undefined);
 const SortContext = createContext<ISort | undefined>(undefined);
 
-export default function SuggestionsContext({
+export default function FeedBacksContext({
   children,
 }: {
   children: ReactNode;

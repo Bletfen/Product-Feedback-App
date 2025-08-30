@@ -6,7 +6,10 @@ export default function GoBack() {
     navigate(-1);
   };
   return (
-    <div className="flex items-center gap-[1.5rem]" onClick={goBack}>
+    <div
+      className="flex items-center gap-[1.5rem] cursor-pointer"
+      onClick={goBack}
+    >
       <svg
         width="5"
         height="10"
