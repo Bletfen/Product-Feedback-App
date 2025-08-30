@@ -1,3 +1,4 @@
+import { useFilterContext } from "../context/SuggestionsContext";
 export default function FilterByCategory() {
   const categoryArray: string[] = [
     "All",
@@ -7,6 +8,7 @@ export default function FilterByCategory() {
     "Bug",
     "Feature",
   ];
+  const { filter, setFilter } = useFilterContext();
   return (
     <div
       className="bg-white rounded-[1rem] pt-[2.4rem] pb-[3.6rem]
@@ -15,10 +17,15 @@ export default function FilterByCategory() {
     "
     >
       {categoryArray.map((cat) => (
-        <div className="py-[0.5rem] px-[1.6rem] bg-[#f2f4ff] rounded-[1rem]">
+        <div
+          className={`py-[0.5rem] px-[1.6rem] rounded-[1rem] cursor-pointer
+            transition-all duration-300
+            ${filter === cat ? "bg-[#4661e6]" : "bg-[#f2f4ff]"}`}
+          onClick={() => setFilter(cat)}
+        >
           <p
-            className="text-[1.3rem] font-semibold
-            text-[#4661e6]"
+            className={`text-[1.3rem] font-semibold
+            ${filter === cat ? "text-white" : "text-[#4661e6]"}`}
           >
             {cat}
           </p>

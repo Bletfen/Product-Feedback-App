@@ -4,7 +4,7 @@ import Roadmap from "./Roadmap";
 export default function Header() {
   const [isHamburgerMenu, setIsHamburgerMenu] = useState<boolean>(false);
   return (
-    <>
+    <div className="relative">
       <div
         className="bg-[radial-gradient(166.82%_166.82%_at_103.9%_-10.39%,_#E84D70_0%,_#A337F6_53.09%,_#28A7ED_100%)]
       flex items-center justify-between py-[1.6rem] px-[2.4rem]"
@@ -48,7 +48,7 @@ export default function Header() {
       </div>
       {isHamburgerMenu && (
         <div
-          className="bg-black/50 inset-0 w-full min-h-screen
+          className="absolute top-29.5 bg-black/50 inset-0 w-full min-h-screen
           flex justify-end"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
@@ -66,6 +66,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import Suggestion from "./pages/Suggestion";
 import ManipulateSuggestion from "./pages/ManipulateSuggestion";
 import RoadMapPage from "./pages/RoadMapPage";
 import SuggestionsContext from "./context/SuggestionsContext";
+import Suggestions from "./pages/Suggestions";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/suggestions",
-        element: <Suggestion />,
+        path: "/",
+        element: <Suggestions />,
       },
     ],
   },
