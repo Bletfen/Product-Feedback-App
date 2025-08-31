@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import GoBack from "../components/GoBack";
-import { useDataContext } from "../context/FeedBacksContext";
+import { useActiveReply, useDataContext } from "../context/FeedBacksContext";
 import FeedBackCard from "../components/FeedBackCard";
 import { useEffect, useState } from "react";
 import CommentsSection from "../components/CommentsSection";
@@ -12,7 +12,7 @@ export default function FeedBack() {
   const { id } = useParams();
   const { currentUser } = data;
   const [comment, setComment] = useState<string>("");
-  const [showReply, setShowReply] = useState<boolean>(false);
+  const { setActiveReplies } = useActiveReply();
   const [replyTo, setReplyTo] = useState<number | null>(null);
   const feed = data.productRequests.find((item) => item.id === Number(id));
   const navigate = useNavigate();
@@ -75,12 +75,14 @@ export default function FeedBack() {
                 feed={feed}
                 com={com}
                 index={index}
-                setShowReply={setShowReply}
-                showReply={showReply}
                 replyTo={replyTo}
                 setReplyTo={setReplyTo}
               >
-                <AddComment />
+                <AddComment
+                  feedId={feed.id}
+                  commentId={com.id}
+                  replyingToUserName={com.user.name}
+                />
               </CommentsSection>
 
               <div
@@ -89,20 +91,23 @@ export default function FeedBack() {
               >
                 <div
                   className="absolute left-0 top-0 
-                  h-[60%] w-px bg-[#647196]/10"
+                  bottom-0 w-px bg-[#647196]/10
+                  "
                 ></div>
 
                 {com.replies?.map((reply, i) => (
                   <ReplyCommentsSection
                     key={i}
                     reply={reply}
-                    setShowReply={setShowReply}
-                    showReply={showReply}
                     index={i}
                     replyTo={replyTo}
                     setReplyTo={setReplyTo}
                   >
-                    <AddComment />
+                    <AddComment
+                      feedId={feed.id}
+                      commentId={com.id}
+                      replyingToUserName={reply.user.name}
+                    />
                   </ReplyCommentsSection>
                 ))}
               </div>
@@ -126,11 +131,16 @@ export default function FeedBack() {
             text-[1.6rem] text-[#8c92b3]"
             maxLength={250}
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={(e) => {
+              setComment(e.target.value);
+              setActiveReplies(false);
+            }}
           />
         </form>
         <div className="flex items-center justify-between">
-          <span>{maxChars - comment.length} Characters left</span>
+          <span className="text-[1.3rem] text-[#647196]">
+            {maxChars - comment.length} Characters left
+          </span>
           <button
             form="addCommentForm"
             type="submit"

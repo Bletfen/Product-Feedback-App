@@ -8,6 +8,7 @@ type TReplies = {
   content: string;
   replyingTo: string;
   user: IUser;
+  replies?: TReplies[];
 };
 
 type TComments = {

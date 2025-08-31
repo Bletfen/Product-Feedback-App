@@ -1,24 +1,22 @@
 import type { ReactNode } from "react";
+import { useActiveReply } from "../context/FeedBacksContext";
 
 export default function CommentsSection({
   feed,
   com,
   index,
-  setShowReply,
   children,
-  showReply,
   replyTo,
   setReplyTo,
 }: {
   feed: TProductRequests | undefined;
   com: TComments;
   index: number;
-  setShowReply: React.Dispatch<React.SetStateAction<boolean>>;
   children: ReactNode;
-  showReply: boolean;
   replyTo: number | null;
   setReplyTo: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
+  const { activeReplies, setActiveReplies } = useActiveReply();
   return (
     <div>
       <div className="flex flex-col">
@@ -45,7 +43,7 @@ export default function CommentsSection({
             cursor-pointer"
             onClick={() => {
               setReplyTo(com.id);
-              setShowReply(true);
+              setActiveReplies(true);
             }}
           >
             Reply
@@ -54,7 +52,7 @@ export default function CommentsSection({
         <div className="mb-[2.4rem]">
           <p className="text-[1.3rem] text-[#647196]">{com.content}</p>
         </div>
-        {showReply && replyTo === com.id ? children : null}
+        {activeReplies && replyTo === com.id ? children : null}
         {feed?.comments &&
         feed.comments?.length > index + 1 &&
         (!com.replies || com.replies?.length === 0) ? (

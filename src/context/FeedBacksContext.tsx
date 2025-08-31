@@ -18,10 +18,18 @@ interface ISort {
   setSortIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface ISetActiveReply {
+  activeReplies: boolean;
+  setActiveReplies: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const DataContext = createContext<IDataContext | undefined>(undefined);
 const FilterContext = createContext<IFilterByCategory | undefined>(undefined);
 const UpVoteContext = createContext<IUpVoteHandler | undefined>(undefined);
 const SortContext = createContext<ISort | undefined>(undefined);
+const ActiveReplyContext = createContext<ISetActiveReply | undefined>(
+  undefined
+);
 
 export default function FeedBacksContext({
   children,
@@ -32,6 +40,7 @@ export default function FeedBacksContext({
   const [filter, setFilter] = useState<string>("All");
   const [upVotedIds, setUpVotedIds] = useState<number[]>([]);
   const [sortIsOpen, setSortIsOpen] = useState<boolean>(false);
+  const [activeReplies, setActiveReplies] = useState<boolean>(false);
   const upVoteHandler = (targetId: number) => {
     if (upVotedIds.includes(targetId)) {
       setData((prev) => ({
@@ -56,7 +65,11 @@ export default function FeedBacksContext({
       <FilterContext.Provider value={{ filter, setFilter }}>
         <UpVoteContext.Provider value={{ upVoteHandler, upVotedIds }}>
           <SortContext.Provider value={{ sortIsOpen, setSortIsOpen }}>
-            {children}
+            <ActiveReplyContext.Provider
+              value={{ activeReplies, setActiveReplies }}
+            >
+              {children}
+            </ActiveReplyContext.Provider>
           </SortContext.Provider>
         </UpVoteContext.Provider>
       </FilterContext.Provider>
@@ -92,6 +105,16 @@ export function useSort() {
   const context = useContext(SortContext);
   if (!context) {
     throw new Error("SortContext must be used within a SuggestionsProvider");
+  }
+  return context;
+}
+
+export function useActiveReply() {
+  const context = useContext(ActiveReplyContext);
+  if (!context) {
+    throw new Error(
+      "ActiveReplyContext must be used within a SuggestionsProvider"
+    );
   }
   return context;
 }
