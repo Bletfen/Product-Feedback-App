@@ -4,7 +4,8 @@ import { useDataContext } from "../context/FeedBacksContext";
 import FeedBackCard from "../components/FeedBackCard";
 import { useEffect, useState } from "react";
 import CommentsSection from "../components/CommentsSection";
-// მოკლედ აქ მოვრჩი, ვაგრძელებთ კომენტარების სექციიდან.
+import ReplyCommentsSection from "../components/ReplyCommentsSection";
+
 export default function FeedBack() {
   const { data } = useDataContext();
   const { id } = useParams();
@@ -42,8 +43,24 @@ export default function FeedBack() {
           {feed?.comments?.length} Comments
         </h1>
         <div className="flex flex-col gap-[2.4rem]">
-          {feed?.comments?.map((com, index) => (
-            <CommentsSection feed={feed} com={com} index={index} />
+          {feed?.comments?.map((com: TComments, index: number) => (
+            <div key={com.id}>
+              <CommentsSection feed={feed} com={com} index={index} />
+
+              <div
+                className="relative flex flex-col gap-[1.7rem] 
+                pl-[2.3rem]"
+              >
+                <div
+                  className="absolute left-0 top-0 
+                  h-[60%] w-px bg-[#647196]/10"
+                ></div>
+
+                {com.replies?.map((reply, i) => (
+                  <ReplyCommentsSection key={i} reply={reply} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

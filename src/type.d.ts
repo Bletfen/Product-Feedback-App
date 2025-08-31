@@ -4,20 +4,27 @@ interface IUser {
   username: string;
 }
 
-type IComments = {
-  id: number;
+type TReplies = {
   content: string;
+  replyingTo: string;
   user: IUser;
 };
 
-type IProductRequests = {
+type TComments = {
+  id: number;
+  content: string;
+  user: IUser;
+  replies: TReplies[];
+};
+
+type TProductRequests = {
   id: number;
   title: string;
   category: string;
   upvotes: number;
   status: string;
   description: string;
-  comments?: IComments[];
+  comments?: TComments[];
 };
 
 interface ICurrentUser {

@@ -3,8 +3,8 @@ export default function CommentsSection({
   com,
   index,
 }: {
-  feed: IProductRequests | undefined;
-  com: IComments;
+  feed: TProductRequests | undefined;
+  com: TComments;
   index: number;
 }) {
   return (
@@ -21,17 +21,23 @@ export default function CommentsSection({
               className="w-[4rem] h-[4rem]
                   rounded-full"
             />
-            <div>
-              <h2>{com.user.name}</h2>
-              <p>{com.user.username}</p>
+            <div className="text-[1.3rem]">
+              <h2 className="text-[#3a4374] font-bold tracking-[-0.181px]">
+                {com.user.name}
+              </h2>
+              <p className="text-[#647196]">{com.user.username}</p>
             </div>
           </div>
-          <span>Reply</span>
+          <span className="text-[1.3rem] font-semibold text-[#4661e6]">
+            Reply
+          </span>
         </div>
         <div className="mb-[2.4rem]">
-          <p>{com.content}</p>
+          <p className="text-[1.3rem] text-[#647196]">{com.content}</p>
         </div>
-        {feed?.comments && feed.comments?.length > index + 1 ? (
+        {feed?.comments &&
+        feed.comments?.length > index + 1 &&
+        com.replies?.length === 0 ? (
           <div className="w-full h-px bg-[#8c92b3]/25"></div>
         ) : null}
       </div>

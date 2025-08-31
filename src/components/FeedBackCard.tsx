@@ -3,7 +3,7 @@ import { useUpVoteHandler } from "../context/FeedBacksContext";
 export default function FeedBackCard({
   feedback,
 }: {
-  feedback: IProductRequests;
+  feedback: TProductRequests;
 }) {
   const { upVotedIds, upVoteHandler } = useUpVoteHandler();
   return (
