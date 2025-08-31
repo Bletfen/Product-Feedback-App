@@ -1,4 +1,22 @@
-export default function ReplyCommentsSection({ reply }: { reply: TReplies }) {
+import type { ReactNode } from "react";
+
+export default function ReplyCommentsSection({
+  reply,
+  setAddComment,
+  children,
+  addComment,
+  index,
+  replyTo,
+  setReplyTo,
+}: {
+  reply: TReplies;
+  setAddComment: React.Dispatch<React.SetStateAction<boolean>>;
+  children: ReactNode;
+  addComment: boolean;
+  index: number;
+  replyTo: number | null;
+  setReplyTo: React.Dispatch<React.SetStateAction<number | null>>;
+}) {
   return (
     <div className="flex flex-col gap-[1.6rem]">
       <div className="flex items-center gap-[1.6rem]">
@@ -19,7 +37,14 @@ export default function ReplyCommentsSection({ reply }: { reply: TReplies }) {
             <p className="text-[#647196]">{reply.user.username}</p>
           </div>
           <div>
-            <span className="text-[1.3rem] font-semibold text-[#4661e6]">
+            <span
+              className="text-[1.3rem] font-semibold text-[#4661e6]
+                cursor-pointer"
+              onClick={() => {
+                setReplyTo(index);
+                setAddComment(true);
+              }}
+            >
               Reply
             </span>
           </div>
@@ -28,6 +53,7 @@ export default function ReplyCommentsSection({ reply }: { reply: TReplies }) {
       <div className="mb-[2.4rem]">
         <p className="text-[1.3rem] text-[#647196]">{reply.content}</p>
       </div>
+      {addComment && replyTo === index ? children : null}
     </div>
   );
 }

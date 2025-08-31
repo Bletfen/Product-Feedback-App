@@ -1,11 +1,23 @@
+import type { ReactNode } from "react";
+
 export default function CommentsSection({
   feed,
   com,
   index,
+  setAddComment,
+  children,
+  addComment,
+  replyTo,
+  setReplyTo,
 }: {
   feed: TProductRequests | undefined;
   com: TComments;
   index: number;
+  setAddComment: React.Dispatch<React.SetStateAction<boolean>>;
+  children: ReactNode;
+  addComment: boolean;
+  replyTo: number | null;
+  setReplyTo: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
   return (
     <div>
@@ -28,7 +40,14 @@ export default function CommentsSection({
               <p className="text-[#647196]">{com.user.username}</p>
             </div>
           </div>
-          <span className="text-[1.3rem] font-semibold text-[#4661e6]">
+          <span
+            className="text-[1.3rem] font-semibold text-[#4661e6]
+            cursor-pointer"
+            onClick={() => {
+              setReplyTo(com.id);
+              setAddComment(true);
+            }}
+          >
             Reply
           </span>
         </div>
@@ -37,10 +56,11 @@ export default function CommentsSection({
         </div>
         {feed?.comments &&
         feed.comments?.length > index + 1 &&
-        com.replies?.length === 0 ? (
+        (!com.replies || com.replies?.length === 0) ? (
           <div className="w-full h-px bg-[#8c92b3]/25"></div>
         ) : null}
       </div>
+      {addComment && replyTo === com.id ? children : null}
     </div>
   );
 }

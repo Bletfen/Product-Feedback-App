@@ -5,12 +5,14 @@ import FeedBackCard from "../components/FeedBackCard";
 import { useEffect, useState } from "react";
 import CommentsSection from "../components/CommentsSection";
 import ReplyCommentsSection from "../components/ReplyCommentsSection";
-
+import AddComment from "../components/AddComment";
+export const maxChars: number = 250;
 export default function FeedBack() {
   const { data } = useDataContext();
   const { id } = useParams();
   const [comment, setComment] = useState<string>("");
-  const maxChars = 250;
+  const [addComment, setAddComment] = useState<boolean>(false);
+  const [replyTo, setReplyTo] = useState<number | null>(null);
   const feed = data.productRequests.find((item) => item.id === Number(id));
   const navigate = useNavigate();
   useEffect(() => {
@@ -45,7 +47,23 @@ export default function FeedBack() {
         <div className="flex flex-col gap-[2.4rem]">
           {feed?.comments?.map((com: TComments, index: number) => (
             <div key={com.id}>
-              <CommentsSection feed={feed} com={com} index={index} />
+              <CommentsSection
+                feed={feed}
+                com={com}
+                index={index}
+                setAddComment={setAddComment}
+                addComment={addComment}
+                replyTo={replyTo}
+                setReplyTo={setReplyTo}
+              >
+                <AddComment
+                  setComment={setComment}
+                  comment={comment}
+                  addComment={addComment}
+                  setAddComment={setAddComment}
+                  maxChars={maxChars}
+                />
+              </CommentsSection>
 
               <div
                 className="relative flex flex-col gap-[1.7rem] 
@@ -57,7 +75,23 @@ export default function FeedBack() {
                 ></div>
 
                 {com.replies?.map((reply, i) => (
-                  <ReplyCommentsSection key={i} reply={reply} />
+                  <ReplyCommentsSection
+                    key={i}
+                    reply={reply}
+                    setAddComment={setAddComment}
+                    addComment={addComment}
+                    index={i}
+                    replyTo={replyTo}
+                    setReplyTo={setReplyTo}
+                  >
+                    <AddComment
+                      setComment={setComment}
+                      comment={comment}
+                      addComment={addComment}
+                      setAddComment={setAddComment}
+                      maxChars={maxChars}
+                    />
+                  </ReplyCommentsSection>
                 ))}
               </div>
             </div>
@@ -65,24 +99,27 @@ export default function FeedBack() {
         </div>
       </div>
       <div className="flex flex-col bg-white rounded-[1rem] p-[2.4rem]">
-        <h2
+        <h1
           className="text-[#3a4374] text-[1.8rem] font-bold
           tracking-[-0.25px] mb-[2.4rem]"
         >
           Add Comment
-        </h2>
+        </h1>
 
-        <textarea
-          placeholder="Type your comment here"
-          className="w-full p-[1.6rem] bg-[#f7f8fd] resize-none
-            rounded-[0.5rem] outline-none mb-[1.6rem]
-            text-[1.6rem] text-[#8c92b3]"
-          maxLength={250}
-          onChange={(e) => setComment(e.target.value)}
-        />
+        <form id="addCommentForm">
+          <AddComment
+            setComment={setComment}
+            comment={comment}
+            addComment={addComment}
+            setAddComment={setAddComment}
+            maxChars={maxChars}
+          />
+        </form>
         <div className="flex items-center justify-between">
           <span>{maxChars - comment.length} Characters left</span>
           <button
+            form="addCommentForm"
+            type="submit"
             className="px-[1.6rem] py-[1.05rem]
               bg-[#ad1fea] rounded-[1rem] text-[#f2f4fe]
               text-[1.3rem] font-bold"
