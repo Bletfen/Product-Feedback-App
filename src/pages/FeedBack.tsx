@@ -5,21 +5,45 @@ import FeedBackCard from "../components/FeedBackCard";
 import { useEffect, useState } from "react";
 import CommentsSection from "../components/CommentsSection";
 import ReplyCommentsSection from "../components/ReplyCommentsSection";
-import AddComment from "../components/AddComment";
+import AddComment from "../components/AddReply";
 export const maxChars: number = 250;
 export default function FeedBack() {
-  const { data } = useDataContext();
+  const { data, setData } = useDataContext();
   const { id } = useParams();
+  const { currentUser } = data;
   const [comment, setComment] = useState<string>("");
-  const [addComment, setAddComment] = useState<boolean>(false);
+  const [showReply, setShowReply] = useState<boolean>(false);
   const [replyTo, setReplyTo] = useState<number | null>(null);
   const feed = data.productRequests.find((item) => item.id === Number(id));
   const navigate = useNavigate();
+
+  const handleAddComment = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!comment.trim()) return;
+    const newComment = {
+      id: Date.now(),
+      content: comment,
+      user: currentUser,
+      replies: [],
+    };
+
+    setData((prev) => ({
+      ...prev,
+      productRequests: prev.productRequests.map((req) =>
+        req.id === feed.id
+          ? { ...req, comments: [...req.comments, newComment] }
+          : req
+      ),
+    }));
+    setComment("");
+  };
+
   useEffect(() => {
     if (!feed) {
       navigate("/");
     }
   }, [feed, navigate]);
+
   return (
     <div
       className="flex flex-col gap-[2.4rem] pt-[2.4rem] pb-[8.8rem]
@@ -51,18 +75,12 @@ export default function FeedBack() {
                 feed={feed}
                 com={com}
                 index={index}
-                setAddComment={setAddComment}
-                addComment={addComment}
+                setShowReply={setShowReply}
+                showReply={showReply}
                 replyTo={replyTo}
                 setReplyTo={setReplyTo}
               >
-                <AddComment
-                  setComment={setComment}
-                  comment={comment}
-                  addComment={addComment}
-                  setAddComment={setAddComment}
-                  maxChars={maxChars}
-                />
+                <AddComment />
               </CommentsSection>
 
               <div
@@ -78,19 +96,13 @@ export default function FeedBack() {
                   <ReplyCommentsSection
                     key={i}
                     reply={reply}
-                    setAddComment={setAddComment}
-                    addComment={addComment}
+                    setShowReply={setShowReply}
+                    showReply={showReply}
                     index={i}
                     replyTo={replyTo}
                     setReplyTo={setReplyTo}
                   >
-                    <AddComment
-                      setComment={setComment}
-                      comment={comment}
-                      addComment={addComment}
-                      setAddComment={setAddComment}
-                      maxChars={maxChars}
-                    />
+                    <AddComment />
                   </ReplyCommentsSection>
                 ))}
               </div>
@@ -106,13 +118,15 @@ export default function FeedBack() {
           Add Comment
         </h1>
 
-        <form id="addCommentForm">
-          <AddComment
-            setComment={setComment}
-            comment={comment}
-            addComment={addComment}
-            setAddComment={setAddComment}
-            maxChars={maxChars}
+        <form id="addCommentForm" onSubmit={(e) => handleAddComment(e)}>
+          <textarea
+            placeholder="Type your comment here"
+            className="w-full p-[1.6rem] bg-[#f7f8fd] resize-none
+            rounded-[0.5rem] outline-none mb-[1.6rem]
+            text-[1.6rem] text-[#8c92b3]"
+            maxLength={250}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           />
         </form>
         <div className="flex items-center justify-between">

@@ -2,17 +2,17 @@ import type { ReactNode } from "react";
 
 export default function ReplyCommentsSection({
   reply,
-  setAddComment,
+  setShowReply,
   children,
-  addComment,
+  showReply,
   index,
   replyTo,
   setReplyTo,
 }: {
   reply: TReplies;
-  setAddComment: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowReply: React.Dispatch<React.SetStateAction<boolean>>;
   children: ReactNode;
-  addComment: boolean;
+  showReply: boolean;
   index: number;
   replyTo: number | null;
   setReplyTo: React.Dispatch<React.SetStateAction<number | null>>;
@@ -42,7 +42,7 @@ export default function ReplyCommentsSection({
                 cursor-pointer"
               onClick={() => {
                 setReplyTo(index);
-                setAddComment(true);
+                setShowReply(true);
               }}
             >
               Reply
@@ -53,7 +53,7 @@ export default function ReplyCommentsSection({
       <div className="mb-[2.4rem]">
         <p className="text-[1.3rem] text-[#647196]">{reply.content}</p>
       </div>
-      {addComment && replyTo === index ? children : null}
+      {showReply && replyTo === index ? children : null}
     </div>
   );
 }

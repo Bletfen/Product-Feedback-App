@@ -4,18 +4,18 @@ export default function CommentsSection({
   feed,
   com,
   index,
-  setAddComment,
+  setShowReply,
   children,
-  addComment,
+  showReply,
   replyTo,
   setReplyTo,
 }: {
   feed: TProductRequests | undefined;
   com: TComments;
   index: number;
-  setAddComment: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowReply: React.Dispatch<React.SetStateAction<boolean>>;
   children: ReactNode;
-  addComment: boolean;
+  showReply: boolean;
   replyTo: number | null;
   setReplyTo: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
@@ -45,7 +45,7 @@ export default function CommentsSection({
             cursor-pointer"
             onClick={() => {
               setReplyTo(com.id);
-              setAddComment(true);
+              setShowReply(true);
             }}
           >
             Reply
@@ -54,13 +54,13 @@ export default function CommentsSection({
         <div className="mb-[2.4rem]">
           <p className="text-[1.3rem] text-[#647196]">{com.content}</p>
         </div>
+        {showReply && replyTo === com.id ? children : null}
         {feed?.comments &&
         feed.comments?.length > index + 1 &&
         (!com.replies || com.replies?.length === 0) ? (
           <div className="w-full h-px bg-[#8c92b3]/25"></div>
         ) : null}
       </div>
-      {addComment && replyTo === com.id ? children : null}
     </div>
   );
 }
