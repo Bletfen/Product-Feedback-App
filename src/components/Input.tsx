@@ -40,6 +40,7 @@ export default function Input({
           className="w-full py-[1.6rem] pl-[1.6rem] pr-[2.4rem] 
           bg-[#f7f8fd] resize-none rounded-[0.5rem] outline-none 
           mb-[1.6rem] text-[1.3rem] text-[#3a4374]"
+          maxLength={250}
         ></textarea>
       )}
     </div>

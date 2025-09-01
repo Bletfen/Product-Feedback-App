@@ -1,4 +1,4 @@
-export default function EditButtons() {
+export default function EditButtons({ isEdit }: { isEdit: boolean }) {
   return (
     <div
       className="flex flex-col gap-[1.6rem]
@@ -10,7 +10,7 @@ export default function EditButtons() {
         className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
       bg-[#ad1fea] rounded-[1rem] cursor-pointer"
       >
-        Save Changes
+        {isEdit ? "Save Changes" : "Add Feedback"}
       </button>
       <button
         className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
@@ -18,12 +18,14 @@ export default function EditButtons() {
       >
         Cancel
       </button>
-      <button
-        className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
+      {isEdit ? (
+        <button
+          className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
       bg-[#d73737] rounded-[1rem] cursor-pointer"
-      >
-        Delete
-      </button>
+        >
+          Delete
+        </button>
+      ) : null}
     </div>
   );
 }

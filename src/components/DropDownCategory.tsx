@@ -1,13 +1,14 @@
 import { useState } from "react";
 export default function DropDownCategory({
   type,
+  value,
+  onChange,
 }: {
   type: "category" | "status";
+  value: string;
+  onChange: (val: string) => void;
 }) {
-  const [category, setCategory] = useState<boolean>(false);
-  const [selectCategory, setSelectCategory] = useState<string>(
-    type === "category" ? "Feature" : "Planned"
-  );
+  const [open, setOpen] = useState<boolean>(false);
   const options =
     type === "category"
       ? ["Feature", "UI", "UX", "Enhancement", "Bug"]
@@ -28,10 +29,10 @@ export default function DropDownCategory({
         className={`py-[1.3rem] px-[2.4rem] bg-[#f7f8fd]
         flex items-center justify-between rounded-[0.5rem]
         border cursor-pointer
-        ${category ? "border border-[#4661e6]" : "border-0"}`}
-        onClick={() => setCategory((prev) => !prev)}
+        ${open ? "border border-[#4661e6]" : "border-0"}`}
+        onClick={() => setOpen((prev) => !prev)}
       >
-        <span className="text-[1.5rem] text-[#3a4374]">{selectCategory}</span>
+        <span className="text-[1.5rem] text-[#3a4374] capitalize">{value}</span>
         <svg
           width="10"
           height="7"
@@ -42,7 +43,7 @@ export default function DropDownCategory({
           <path d="M1 1L5 5L9 1" stroke="#4661E6" stroke-width="2" />
         </svg>
       </div>
-      {category ? (
+      {open ? (
         <div
           className={`absolute bg-white rounded-[1rem]
         shadow-[0_10px_40px_-7px_rgba(55,63,104,0.35)]
@@ -57,20 +58,18 @@ export default function DropDownCategory({
                 px-[2.4rem] cursor-pointer group
                 "
                 onClick={() => {
-                  setSelectCategory(cat);
-                  setCategory(false);
+                  onChange(cat);
+                  setOpen(false);
                 }}
               >
                 <span
                   className={`text-[1.6rem] transition-all duration-300
                     group-hover:text-[#ad1fea]
-                ${
-                  selectCategory === cat ? "text-[#ad1fea]" : "text-[#647196]"
-                }`}
+                ${value === cat ? "text-[#ad1fea]" : "text-[#647196]"}`}
                 >
                   {cat}
                 </span>
-                {selectCategory === cat ? (
+                {value === cat ? (
                   <svg
                     width="13"
                     height="11"

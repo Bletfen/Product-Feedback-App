@@ -35,7 +35,9 @@ export default function FeedBackCard({
           >
             {feedback.title}
           </h1>
-          <p className="text-[#647196]">{feedback.description}</p>
+          <p className="text-[#647196] break-words whitespace-pre-wrap">
+            {feedback.description}
+          </p>
           <div>
             <span
               className="

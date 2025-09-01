@@ -5,6 +5,7 @@ import { useDataContext } from "../context/FeedBacksContext";
 import DropDownCategory from "../components/DropDownCategory";
 import { useForm } from "react-hook-form";
 import EditButtons from "../components/EditButtons";
+import { useState } from "react";
 export default function ManipulateFeedBack() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,24 +19,48 @@ export default function ManipulateFeedBack() {
       return null;
     }
   };
+  const feedBack = feedBackFunc();
+  const [category, setCategory] = useState<string>(
+    feedBack?.category ?? "Feature"
+  );
+  const [status, setStatus] = useState<string>(feedBack?.status ?? "Planned");
   const { register, handleSubmit } = useForm<{
     title: string;
     description: string;
   }>();
 
   const onSubmit = (data: { title: string; description: string }) => {
-    setData((prev) => ({
-      ...prev,
-      productRequests: prev.productRequests.map((req) =>
-        req.id === Number(id)
-          ? {
-              ...req,
-              title: data.title,
-              description: data.description,
-            }
-          : req
-      ),
-    }));
+    if (isEdit) {
+      setData((prev) => ({
+        ...prev,
+        productRequests: prev.productRequests.map((req) =>
+          req.id === Number(id)
+            ? {
+                ...req,
+                title: data.title,
+                description: data.description,
+                category: category,
+                status: status,
+              }
+            : req
+        ),
+      }));
+    } else {
+      const newRequest = {
+        id: Date.now(),
+        title: data.title,
+        description: data.description,
+        category: category,
+        upvotes: 0,
+        status: "planned",
+        comments: [],
+      };
+
+      setData((prev) => ({
+        ...prev,
+        productRequests: [...prev.productRequests, newRequest],
+      }));
+    }
     navigate(-1);
   };
 
@@ -96,8 +121,18 @@ export default function ManipulateFeedBack() {
             isEdit={isEdit}
             register={register("title", { required: true })}
           />
-          <DropDownCategory type={"category"} />
-          {isEdit && <DropDownCategory type={"status"} />}
+          <DropDownCategory
+            type={"category"}
+            value={category}
+            onChange={setCategory}
+          />
+          {isEdit && (
+            <DropDownCategory
+              type={"status"}
+              value={status}
+              onChange={setStatus}
+            />
+          )}
           <Input
             type={"textarea"}
             title={"Feedback Detail"}
@@ -108,7 +143,7 @@ export default function ManipulateFeedBack() {
             isEdit={isEdit}
             register={register("description", { required: true })}
           />
-          <EditButtons />
+          <EditButtons isEdit={isEdit} />
         </form>
       </div>
     </div>
