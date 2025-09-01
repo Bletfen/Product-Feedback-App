@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import GoBack from "../components/GoBack";
 import Input from "../components/Input";
 import { useDataContext } from "../context/FeedBacksContext";
+import PopUpInput from "../components/PopUpInput";
 export default function ManipulateFeedBack() {
   const location = useLocation();
   const { id } = useParams();
@@ -66,6 +67,7 @@ export default function ManipulateFeedBack() {
             feedBackFunc={feedBackFunc}
             isEdit={isEdit}
           />
+          <PopUpInput />
         </form>
       </div>
     </div>

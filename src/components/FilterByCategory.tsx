@@ -1,13 +1,6 @@
 import { useFilterContext } from "../context/FeedBacksContext";
+import { categoryArray } from "../seperateFuncs";
 export default function FilterByCategory() {
-  const categoryArray: string[] = [
-    "All",
-    "UI",
-    "UX",
-    "Enhancement",
-    "Bug",
-    "Feature",
-  ];
   const { filter, setFilter } = useFilterContext();
   return (
     <div
