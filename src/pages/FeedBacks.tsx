@@ -60,7 +60,7 @@ export default function FeedBacks() {
             onClick={() => setSortIsOpen(false)}
           >
             {finalData.map((feedback) => (
-              <FeedBackCard feedback={feedback} />
+              <FeedBackCard key={feedback.id} feedback={feedback} />
             ))}
           </div>
         </div>

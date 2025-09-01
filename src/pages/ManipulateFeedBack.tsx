@@ -64,6 +64,16 @@ export default function ManipulateFeedBack() {
     navigate(-1);
   };
 
+  const handleDelete = () => {
+    setData((prev) => ({
+      ...prev,
+      productRequests: prev.productRequests.filter(
+        (item) => item.id !== Number(id)
+      ),
+    }));
+    navigate("/");
+  };
+
   return (
     <div
       className="pt-[3.4rem] px-[2.4rem] flex flex-col
@@ -143,7 +153,7 @@ export default function ManipulateFeedBack() {
             isEdit={isEdit}
             register={register("description", { required: true })}
           />
-          <EditButtons isEdit={isEdit} />
+          <EditButtons isEdit={isEdit} handleDelete={handleDelete} />
         </form>
       </div>
     </div>

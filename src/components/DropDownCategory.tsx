@@ -40,7 +40,7 @@ export default function DropDownCategory({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M1 1L5 5L9 1" stroke="#4661E6" stroke-width="2" />
+          <path d="M1 1L5 5L9 1" stroke="#4661E6" strokeWidth="2" />
         </svg>
       </div>
       {open ? (
@@ -80,7 +80,7 @@ export default function DropDownCategory({
                     <path
                       d="M1 5.23287L4.52154 9L12 1"
                       stroke="#AD1FEA"
-                      stroke-width="2"
+                      strokeWidth="2"
                     />
                   </svg>
                 ) : null}
