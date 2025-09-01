@@ -52,7 +52,7 @@ export default function FeedBack() {
       <div className="flex items-center justify-between">
         <GoBack />
         <Link
-          to={"/:id/edit"}
+          to={`/edit/${feed.id}`}
           className="px-[1.6rem] py-[1.05rem]
           text-[1.3rem] font-bold text-[#f2f4fa]
           bg-[#4661e6] rounded-[1rem]"

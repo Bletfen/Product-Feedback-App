@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <ManipulateFeedBack />,
   },
   {
-    path: "/:id/edit",
+    path: "/edit/:id",
     element: <ManipulateFeedBack />,
   },
   {
