@@ -5,7 +5,9 @@ export default function DropDownCategory({
   type: "category" | "status";
 }) {
   const [category, setCategory] = useState<boolean>(false);
-  const [selectCategory, setSelectCategory] = useState<string>("Feature");
+  const [selectCategory, setSelectCategory] = useState<string>(
+    type === "category" ? "Feature" : "Planned"
+  );
   const options =
     type === "category"
       ? ["Feature", "UI", "UX", "Enhancement", "Bug"]

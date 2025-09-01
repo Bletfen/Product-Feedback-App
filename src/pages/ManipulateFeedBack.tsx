@@ -1,20 +1,42 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import GoBack from "../components/GoBack";
 import Input from "../components/Input";
 import { useDataContext } from "../context/FeedBacksContext";
-import PopUpInput from "../components/DropDownCategory";
 import DropDownCategory from "../components/DropDownCategory";
+import { useForm } from "react-hook-form";
+import EditButtons from "../components/EditButtons";
 export default function ManipulateFeedBack() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { id } = useParams();
   const isEdit = location.pathname.includes("/edit");
-  const { data } = useDataContext();
+  const { data, setData } = useDataContext();
   const feedBackFunc = () => {
     if (isEdit) {
       return data.productRequests.find((item) => item.id === Number(id));
     } else {
       return null;
     }
+  };
+  const { register, handleSubmit } = useForm<{
+    title: string;
+    description: string;
+  }>();
+
+  const onSubmit = (data: { title: string; description: string }) => {
+    setData((prev) => ({
+      ...prev,
+      productRequests: prev.productRequests.map((req) =>
+        req.id === Number(id)
+          ? {
+              ...req,
+              title: data.title,
+              description: data.description,
+            }
+          : req
+      ),
+    }));
+    navigate(-1);
   };
 
   return (
@@ -61,15 +83,32 @@ export default function ManipulateFeedBack() {
         >
           Create New Feedback
         </h1>
-        <form className="flex flex-col gap-[2.4rem]">
+        <form
+          id="feedbackForm"
+          className="flex flex-col gap-[2.4rem]"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Input
+            type={"input"}
             title={"Feedback Title"}
             label={"Add a short, descriptive headline"}
             feedBackFunc={feedBackFunc}
             isEdit={isEdit}
+            register={register("title", { required: true })}
           />
           <DropDownCategory type={"category"} />
-          <DropDownCategory type={"status"} />
+          {isEdit && <DropDownCategory type={"status"} />}
+          <Input
+            type={"textarea"}
+            title={"Feedback Detail"}
+            label={
+              "Include any specific comments on what should be improved, added, etc."
+            }
+            feedBackFunc={feedBackFunc}
+            isEdit={isEdit}
+            register={register("description", { required: true })}
+          />
+          <EditButtons />
         </form>
       </div>
     </div>
