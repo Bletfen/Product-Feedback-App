@@ -2,7 +2,8 @@ import { useLocation, useParams } from "react-router-dom";
 import GoBack from "../components/GoBack";
 import Input from "../components/Input";
 import { useDataContext } from "../context/FeedBacksContext";
-import PopUpInput from "../components/PopUpInput";
+import PopUpInput from "../components/DropDownCategory";
+import DropDownCategory from "../components/DropDownCategory";
 export default function ManipulateFeedBack() {
   const location = useLocation();
   const { id } = useParams();
@@ -60,14 +61,15 @@ export default function ManipulateFeedBack() {
         >
           Create New Feedback
         </h1>
-        <form>
+        <form className="flex flex-col gap-[2.4rem]">
           <Input
             title={"Feedback Title"}
             label={"Add a short, descriptive headline"}
             feedBackFunc={feedBackFunc}
             isEdit={isEdit}
           />
-          <PopUpInput />
+          <DropDownCategory type={"category"} />
+          <DropDownCategory type={"status"} />
         </form>
       </div>
     </div>

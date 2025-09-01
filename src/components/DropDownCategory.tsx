@@ -1,16 +1,32 @@
 import { useState } from "react";
-import { categoryArray } from "../seperateFuncs";
-export default function PopUpInput() {
+export default function DropDownCategory({
+  type,
+}: {
+  type: "category" | "status";
+}) {
   const [category, setCategory] = useState<boolean>(false);
   const [selectCategory, setSelectCategory] = useState<string>("Feature");
-  const catArray = ["Feature", "UI", "UX", "Enhancement", "Bug"];
+  const options =
+    type === "category"
+      ? ["Feature", "UI", "UX", "Enhancement", "Bug"]
+      : ["Planned", "In-Progress", "Live"];
   return (
     <div className="relative">
+      <div className="flex flex-col mb-[1.6rem]">
+        <h1 className="text-[1.3rem] text-[#3a4374] font-bold tracking-[-0.181px]">
+          {type === "category" ? "Category" : "Update Status"}
+        </h1>
+        <p className="text-[1.3rem] text-[#647196]">
+          {type === "category"
+            ? "Choose a category for your feedback"
+            : "Change feature state"}
+        </p>
+      </div>
       <div
         className={`py-[1.3rem] px-[2.4rem] bg-[#f7f8fd]
         flex items-center justify-between rounded-[0.5rem]
         border cursor-pointer
-        ${category ? "border-1 border-[#4661e6]" : "border-0"}`}
+        ${category ? "border border-[#4661e6]" : "border-0"}`}
         onClick={() => setCategory((prev) => !prev)}
       >
         <span className="text-[1.5rem] text-[#3a4374]">{selectCategory}</span>
@@ -26,12 +42,12 @@ export default function PopUpInput() {
       </div>
       {category ? (
         <div
-          className="absolute bg-white rounded-[1rem]
+          className={`absolute bg-white rounded-[1rem]
         shadow-[0_10px_40px_-7px_rgba(55,63,104,0.35)]
-        w-full top-25
-        "
+        w-full top-45 z-1
+        ${type === "category" ? "z-2" : "z-1"}`}
         >
-          {catArray.map((cat, index) => (
+          {options.map((cat, index) => (
             <div key={index} className="">
               <div
                 className="py-[1.2rem]
@@ -68,7 +84,7 @@ export default function PopUpInput() {
                   </svg>
                 ) : null}
               </div>
-              {catArray.length > index + 1 ? (
+              {options.length > index + 1 ? (
                 <div className="bg-[#3a4374]/15 h-px w-full"></div>
               ) : null}
             </div>
