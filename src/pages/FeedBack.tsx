@@ -1,19 +1,19 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import GoBack from "../components/GoBack";
-import { useActiveReply, useDataContext } from "../context/FeedBacksContext";
+import { useDataContext } from "../context/FeedBacksContext";
 import FeedBackCard from "../components/FeedBackCard";
 import { useEffect, useState } from "react";
 import CommentsSection from "../components/CommentsSection";
 import ReplyCommentsSection from "../components/ReplyCommentsSection";
-import AddComment from "../components/AddReply";
+import AddReply from "../components/AddReply";
 export const maxChars: number = 250;
+
 export default function FeedBack() {
   const { data, setData } = useDataContext();
   const { id } = useParams();
   const { currentUser } = data;
   const [comment, setComment] = useState<string>("");
-  const { setActiveReplies } = useActiveReply();
-  const [replyTo, setReplyTo] = useState<number | null>(null);
+  const [activeReplyId, setActiveReplyId] = useState<number | null>(null);
   const feed = data.productRequests.find((item) => item.id === Number(id));
   const navigate = useNavigate();
 
@@ -75,13 +75,14 @@ export default function FeedBack() {
                 feed={feed}
                 com={com}
                 index={index}
-                replyTo={replyTo}
-                setReplyTo={setReplyTo}
+                activeReplyId={activeReplyId}
+                setActiveReplyId={setActiveReplyId}
               >
-                <AddComment
+                <AddReply
                   feedId={feed.id}
                   commentId={com.id}
                   replyingToUserName={com.user.name}
+                  setActiveReplyId={setActiveReplyId}
                 />
               </CommentsSection>
 
@@ -99,14 +100,14 @@ export default function FeedBack() {
                   <ReplyCommentsSection
                     key={i}
                     reply={reply}
-                    index={i}
-                    replyTo={replyTo}
-                    setReplyTo={setReplyTo}
+                    setActiveReplyId={setActiveReplyId}
+                    activeReplyId={activeReplyId}
                   >
-                    <AddComment
+                    <AddReply
                       feedId={feed.id}
                       commentId={com.id}
                       replyingToUserName={reply.user.name}
+                      setActiveReplyId={setActiveReplyId}
                     />
                   </ReplyCommentsSection>
                 ))}
@@ -133,7 +134,7 @@ export default function FeedBack() {
             value={comment}
             onChange={(e) => {
               setComment(e.target.value);
-              setActiveReplies(false);
+              setActiveReplyId(null);
             }}
           />
         </form>

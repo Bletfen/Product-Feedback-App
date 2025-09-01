@@ -5,6 +5,7 @@ interface IUser {
 }
 
 type TReplies = {
+  id: number;
   content: string;
   replyingTo: string;
   user: IUser;

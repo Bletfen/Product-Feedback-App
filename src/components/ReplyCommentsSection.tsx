@@ -1,20 +1,16 @@
 import type { ReactNode } from "react";
-import { useActiveReply } from "../context/FeedBacksContext";
 
 export default function ReplyCommentsSection({
   reply,
   children,
-  index,
-  replyTo,
-  setReplyTo,
+  setActiveReplyId,
+  activeReplyId,
 }: {
   reply: TReplies;
   children: ReactNode;
-  index: number;
-  replyTo: number | null;
-  setReplyTo: React.Dispatch<React.SetStateAction<number | null>>;
+  setActiveReplyId: React.Dispatch<React.SetStateAction<number | null>>;
+  activeReplyId: number | null;
 }) {
-  const { activeReplies, setActiveReplies } = useActiveReply();
   return (
     <div className="flex flex-col gap-[1.6rem]">
       <div className="flex items-center gap-[1.6rem]">
@@ -39,8 +35,7 @@ export default function ReplyCommentsSection({
               className="text-[1.3rem] font-semibold text-[#4661e6]
                 cursor-pointer"
               onClick={() => {
-                setReplyTo(index);
-                setActiveReplies(true);
+                setActiveReplyId(reply.id);
               }}
             >
               Reply
@@ -54,7 +49,7 @@ export default function ReplyCommentsSection({
           {reply.content}
         </p>
       </div>
-      {activeReplies && replyTo === index ? children : null}
+      {activeReplyId === reply.id ? children : null}
     </div>
   );
 }

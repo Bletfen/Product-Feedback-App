@@ -1,22 +1,25 @@
 import { useState } from "react";
-import { useActiveReply, useDataContext } from "../context/FeedBacksContext";
+import { useDataContext } from "../context/FeedBacksContext";
 export default function AddReply({
   feedId,
   commentId,
   replyingToUserName,
+  setActiveReplyId,
 }: {
   feedId: number;
   commentId: number;
   replyingToUserName: string;
+  setActiveReplyId: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
-  const { setActiveReplies } = useActiveReply();
   const { data, setData } = useDataContext();
   const { currentUser } = data;
   const [reply, setReply] = useState<string>("");
+
   const handleAddReply = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!reply.trim()) return;
     const newReply = {
+      id: Date.now(),
       content: reply,
       replyingTo: replyingToUserName,
       user: currentUser,
@@ -30,7 +33,7 @@ export default function AddReply({
               ...req,
               comments: req.comments.map((com: TComments) =>
                 com.id === commentId
-                  ? { ...com, replies: [...com.replies, newReply] }
+                  ? { ...com, replies: [...(com.replies ?? []), newReply] }
                   : com
               ),
             }
@@ -39,7 +42,7 @@ export default function AddReply({
     }));
 
     setReply("");
-    setActiveReplies(false);
+    setActiveReplyId(null);
   };
   return (
     <form
