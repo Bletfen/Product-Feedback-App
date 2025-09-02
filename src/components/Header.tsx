@@ -8,13 +8,16 @@ export default function Header() {
   return (
     <div
       className="relative md:grid grid-cols-3 gap-[1rem]
-        md:px-[4rem] md:pt-[5.6rem]"
+        md:px-[4rem] md:pt-[5.6rem]
+        md:max-w-[82.5rem] md:mx-auto"
       onClick={() => setSortIsOpen(false)}
     >
       <div
         className="bg-[radial-gradient(166.82%_166.82%_at_103.9%_-10.39%,_#E84D70_0%,_#A337F6_53.09%,_#28A7ED_100%)]
       flex items-center justify-between py-[1.6rem] px-[2.4rem]
-      md:rounded-[1rem] md:items-end md:py-[unset] md:pb-[2.4rem]"
+      md:rounded-[1rem] md:items-end md:py-[unset] md:pb-[2.4rem]
+      transition-all duration-300 md:max-w-[25.5rem]
+      "
       >
         <div className="text-white">
           <h1 className="text-[1.5rem] font-bold">Frontend Mentor</h1>
@@ -73,8 +76,12 @@ export default function Header() {
           </div>
         </div>
       )}
-      <FilterByCategory />
-      <Roadmap />
+      <div className="hidden md:flex">
+        <FilterByCategory />
+      </div>
+      <div className="hidden md:flex">
+        <Roadmap />
+      </div>
     </div>
   );
 }

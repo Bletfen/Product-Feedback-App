@@ -32,6 +32,7 @@ export default function Roadmap() {
     <div
       className="px-[2.4rem] pt-[1.9rem] pb-[2.4rem] bg-white 
     rounded-[1rem] flex flex-col gap-[2.4rem]
+    transition-all duration-300 max-w-[25.5rem]
     "
     >
       <div className="flex items-center gap-[6.7rem]">

@@ -7,6 +7,8 @@ export default function FilterByCategory() {
       className="bg-white rounded-[1rem] pt-[2.4rem] pb-[3.6rem]
     px-[2.4rem]
     flex flex-wrap gap-[0.8rem]
+    transition-all duration-300
+    max-w-[25.5rem]
     "
     >
       {categoryArray.map((cat) => (

@@ -41,11 +41,12 @@ export default function FeedBacks() {
       {finalData.length === 0 ? (
         <Empty />
       ) : (
-        <div>
+        <div className="md:px-[4rem]">
           <MainHeader
             setSortIsOpen={setSortIsOpen}
             sortIsOpen={sortIsOpen}
             sort={sort}
+            finalData={finalData}
           >
             <SortFilter
               setSort={setSort}
