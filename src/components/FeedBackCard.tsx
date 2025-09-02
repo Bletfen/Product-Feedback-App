@@ -6,6 +6,10 @@ export default function FeedBackCard({
   feedback: TProductRequests;
 }) {
   const { upVotedIds, upVoteHandler } = useUpVoteHandler();
+
+  // გავჩერდი აქ კარტებს ვაკეთებდი, კომპონენტის შემოკლება მინდოდა მაგრამ
+  // დაიკიდე ეგ.
+
   return (
     <Link
       to={`/suggestion/${feedback.id}`}
