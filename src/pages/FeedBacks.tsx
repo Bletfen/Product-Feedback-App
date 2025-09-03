@@ -38,34 +38,34 @@ export default function FeedBacks() {
 
   return (
     <>
-      {finalData.length === 0 ? (
-        <Empty />
-      ) : (
-        <div className="md:px-[4rem]">
-          <MainHeader
-            setSortIsOpen={setSortIsOpen}
-            sortIsOpen={sortIsOpen}
+      <div className="md:px-[4rem]">
+        <MainHeader
+          setSortIsOpen={setSortIsOpen}
+          sortIsOpen={sortIsOpen}
+          sort={sort}
+          finalData={finalData}
+        >
+          <SortFilter
+            setSort={setSort}
             sort={sort}
-            finalData={finalData}
-          >
-            <SortFilter
-              setSort={setSort}
-              sort={sort}
-              setSortIsOpen={setSortIsOpen}
-            />
-          </MainHeader>
+            setSortIsOpen={setSortIsOpen}
+          />
+        </MainHeader>
+        {finalData.length === 0 ? (
+          <Empty />
+        ) : (
           <div
             className="flex flex-col gap-[1.6rem]
             pt-[3.3rem] pb-[5.5rem]
-            px-[2.4rem]"
+            px-[2.4rem] md:px-[unset] md:pt-[2.4rem]"
             onClick={() => setSortIsOpen(false)}
           >
             {finalData.map((feedback) => (
               <FeedBackCard key={feedback.id} feedback={feedback} />
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

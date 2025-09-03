@@ -21,7 +21,7 @@ export default function GoBack() {
       </svg>
       <span
         className="text-[1.3rem] text-[#647196]
-        font-bold"
+        font-bold md:text-[1.4rem]"
       >
         Go Back
       </span>

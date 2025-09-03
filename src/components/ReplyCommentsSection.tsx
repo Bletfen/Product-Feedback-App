@@ -44,8 +44,16 @@ export default function ReplyCommentsSection({
         </div>
       </div>
       <div className="mb-[2.4rem]">
-        <p className="text-[1.3rem] text-[#647196]">
-          <span className="text-[#ad1fea] font-bold">@{reply.replyingTo} </span>
+        <p
+          className="text-[1.3rem] text-[#647196]
+          break-words whitespace-pre-wrap"
+        >
+          <span
+            className="text-[#ad1fea] font-bold
+            "
+          >
+            @{reply.replyingTo}{" "}
+          </span>
           {reply.content}
         </p>
       </div>

@@ -47,7 +47,7 @@ export default function AddReply({
   return (
     <form
       id="replyForm"
-      className="flex items-start gap-[1.6rem]"
+      className="flex items-start gap-[1.6rem] w-full mb-[3.2rem]"
       onSubmit={(e) => handleAddReply(e)}
     >
       <textarea
