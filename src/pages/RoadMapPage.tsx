@@ -21,10 +21,15 @@ export default function RoadMapPage() {
   );
   const categoryArray = ["Planned", "In-Progress", "Live"];
   return (
-    <div className="pb-[9.8rem]">
+    <div
+      className="pb-[9.8rem]
+    md:pt-[5.6rem] md:px-[4rem]"
+    >
       <div
         className="flex justify-between bg-[#373f68]
-        px-[2.4rem] py-[2.6rem] items-center"
+        px-[2.4rem] py-[2.6rem] items-center
+        md:py-[2.7rem] md:px-[3.2rem]
+        md:rounded-[1rem]"
       >
         <div className="flex flex-col gap-[0.3rem]">
           <div
@@ -49,7 +54,7 @@ export default function RoadMapPage() {
           </div>
           <h1
             className="text-[1.8rem] text-white font-bold
-            tracking-[-0.25px]"
+            tracking-[-0.25px] md:text-[2.4rem] md:tracking-[-0.333px]"
           >
             Roadmap
           </h1>
@@ -59,7 +64,7 @@ export default function RoadMapPage() {
 
       <div
         className="flex px-[2.4rem] justify-between
-        py-[2rem]"
+        py-[2rem] md:hidden"
       >
         {categoryArray.map((cat) => (
           <div key={cat}>
@@ -81,8 +86,8 @@ export default function RoadMapPage() {
           </div>
         ))}
       </div>
-      <div className="h-px w-full bg-[#8c92b3]/25"></div>
-      <div className="px-[2.4rem] my-[2.4rem]">
+      <div className="h-px w-full bg-[#8c92b3]/25 md:hidden"></div>
+      <div className="px-[2.4rem] my-[2.4rem] md:hidden">
         <h2 className="text-[1.8rem] text-[#3a4374] font-bold tracking-[-0.25px]">
           {showRoad === "Planned"
             ? `Planned (${plannedData.length})`
@@ -98,14 +103,31 @@ export default function RoadMapPage() {
             : "Released features"}
         </p>
       </div>
-      <div className="px-[2.4rem]">
+      <div className="px-[2.4rem] md:hidden">
         {showRoad === "Planned" ? (
-          <RoadMapCards data={plannedData} color={"#f49f85"} />
+          <RoadMapCards
+            data={plannedData}
+            color={"#f49f85"}
+            title={"Planned"}
+          />
         ) : showRoad === "In-Progress" ? (
-          <RoadMapCards data={inProgressData} color={"#ad1fea"} />
+          <RoadMapCards
+            data={inProgressData}
+            color={"#ad1fea"}
+            title={"In-Progress"}
+          />
         ) : (
-          <RoadMapCards data={liveData} color={"#62bcfa"} />
+          <RoadMapCards data={liveData} color={"#62bcfa"} title={"Live"} />
         )}
+      </div>
+      <div className="hidden md:grid grid-cols-3 gap-[1rem]">
+        <RoadMapCards data={plannedData} color={"#f49f85"} title={"Planned"} />
+        <RoadMapCards
+          data={inProgressData}
+          color={"#ad1fea"}
+          title={"In-Progress"}
+        />
+        <RoadMapCards data={liveData} color={"#62bcfa"} title={"Live"} />
       </div>
     </div>
   );

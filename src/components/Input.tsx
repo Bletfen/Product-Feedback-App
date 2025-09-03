@@ -16,8 +16,12 @@ export default function Input({
   const feedback = feedBackFunc();
   return (
     <div className="flex flex-col gap-[1.6rem]">
-      <div className="flex flex-col text-[1.3rem]">
-        <span className="text-[#3a4374] font-bold tracking-[-0.181px]">
+      <div className="flex flex-col text-[1.3rem] md:text-[1.4rem]">
+        <span
+          className="text-[#3a4374] font-bold tracking-[-0.181px]
+          md:tracking-[-0.194px]
+          "
+        >
           {title}
         </span>
         <label htmlFor="headline" className="text-[#647196]">
@@ -32,15 +36,18 @@ export default function Input({
           defaultValue={isEdit ? feedback.title : ""}
           className="py-[1.5rem] px-[1.6rem] text-[1.3rem]
                 text-[#3a4374] outline-none bg-[#f7f8fd]
-                rounded-[0.5rem]"
+                rounded-[0.5rem] md:text-[1.5rem]
+                md:py-[1.3rem] md:px-[2.4rem]"
         />
       ) : (
         <textarea
           {...register}
           className="w-full py-[1.6rem] pl-[1.6rem] pr-[2.4rem] 
           bg-[#f7f8fd] resize-none rounded-[0.5rem] outline-none 
-          mb-[1.6rem] text-[1.3rem] text-[#3a4374]"
+          mb-[1.6rem] text-[1.3rem] text-[#3a4374] md:text-[1.5rem]
+          md:py-[1.3rem] md:px-[2.4rem]"
           maxLength={250}
+          defaultValue={isEdit ? feedback.description : ""}
         ></textarea>
       )}
     </div>

@@ -77,44 +77,80 @@ export default function ManipulateFeedBack() {
   return (
     <div
       className="pt-[3.4rem] px-[2.4rem] flex flex-col
-      gap-[3.5rem]"
+      gap-[3.5rem] max-w-[60rem] mx-auto md:pt-[5.6rem]
+      md:pb-[22.3rem] md:gap-[6.8rem]"
     >
       <GoBack />
       <div
         className="pt-[4.4rem] px-[2.4rem] pb-[2.4rem]
-        bg-white relative"
+        bg-white relative max-w-[54rem] rounded-[1rem]
+        md:pt-[5.2rem]
+        md:pb-[4rem] md:px-[4.2rem]"
       >
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute -top-8"
-        >
-          <circle cx="20" cy="20" r="20" fill="url(#paint0_radial_0_173)" />
-          <path
-            d="M21.6732 25.7142V21.5469H25.7353V18.474H21.6732V14.2856H18.3898V18.474H14.2856V21.5469H18.3898V25.7142H21.6732Z"
-            fill="white"
-          />
-          <defs>
-            <radialGradient
-              id="paint0_radial_0_173"
-              cx="0"
-              cy="0"
-              r="1"
-              gradientUnits="userSpaceOnUse"
-              gradientTransform="translate(41.56 -4.15462) rotate(129.411) scale(66.7263)"
-            >
-              <stop stopColor="#E84D70" />
-              <stop offset="0.530886" stopColor="#A337F6" />
-              <stop offset="1" stopColor="#28A7ED" />
-            </radialGradient>
-          </defs>
-        </svg>
+        {isEdit ? (
+          <svg
+            width="56"
+            height="56"
+            viewBox="0 0 56 56"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="absolute -top-11 w-[4rem] h-[4rem] md:w-[5.6rem] h-[5.6rem]"
+          >
+            <circle cx="28" cy="28" r="28" fill="url(#paint0_radial_0_801)" />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M29.0825 19.4809L32.8315 16L39.345 22.2719L35.7969 25.952L29.0825 19.4809ZM16 39.5949C16.9207 35.6533 19.4867 25.5743 19.4867 25.5743L27.6895 20.7535L34.5209 27.1499L29.3017 34.97L16.313 40L22.4703 34.2104C23.513 34.5998 24.9857 34.2478 25.7818 33.3736C26.8328 32.2255 26.7539 30.4423 25.605 29.3914C24.456 28.3404 22.5848 28.3404 21.5339 29.4885C20.751 30.3444 20.4812 31.8544 20.9287 32.8498L16 39.5949Z"
+              fill="white"
+            />
+            <defs>
+              <radialGradient
+                id="paint0_radial_0_801"
+                cx="0"
+                cy="0"
+                r="1"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="translate(58.184 -5.81647) rotate(129.411) scale(93.4169)"
+              >
+                <stop stop-color="#E84D70" />
+                <stop offset="0.530886" stop-color="#A337F6" />
+                <stop offset="1" stop-color="#28A7ED" />
+              </radialGradient>
+            </defs>
+          </svg>
+        ) : (
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="absolute -top-11 w-[4rem] h-[4rem] md:w-[5.6rem] h-[5.6rem]"
+          >
+            <circle cx="20" cy="20" r="20" fill="url(#paint0_radial_0_173)" />
+            <path
+              d="M21.6732 25.7142V21.5469H25.7353V18.474H21.6732V14.2856H18.3898V18.474H14.2856V21.5469H18.3898V25.7142H21.6732Z"
+              fill="white"
+            />
+            <defs>
+              <radialGradient
+                id="paint0_radial_0_173"
+                cx="0"
+                cy="0"
+                r="1"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="translate(41.56 -4.15462) rotate(129.411) scale(66.7263)"
+              >
+                <stop stop-color="#E84D70" />
+                <stop offset="0.530886" stop-color="#A337F6" />
+                <stop offset="1" stop-color="#28A7ED" />
+              </radialGradient>
+            </defs>
+          </svg>
+        )}
         <h1
           className="text-[1.8rem] font-bold tracking-[-0.25px]
-          text-[#3a4374] mb-[2.4rem]"
+          text-[#3a4374] mb-[2.4rem] md:text-[2.4rem] md:tracking-[-0.333px]"
         >
           Create New Feedback
         </h1>

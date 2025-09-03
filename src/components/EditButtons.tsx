@@ -13,28 +13,38 @@ export default function EditButtons({
   };
   return (
     <div
-      className="flex flex-col gap-[1.6rem]
-        w-full mt-[1.6rem]"
+      className={`flex flex-col gap-[1.6rem]
+        w-full mt-[1.6rem] md:flex-row md:items-center
+        ${isEdit ? "md:justify-between" : "md:justify-end"}`}
     >
-      <button
-        type="submit"
-        id="feedbackForm"
-        className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
-      bg-[#ad1fea] rounded-[1rem] cursor-pointer"
+      <div
+        className="flex flex-col gap-[1.6rem]
+        md:order-2 md:flex-row"
       >
-        {isEdit ? "Save Changes" : "Add Feedback"}
-      </button>
-      <button
-        className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
-      bg-[#3a4374] rounded-[1rem] cursor-pointer"
-        onClick={goBack}
-      >
-        Cancel
-      </button>
+        <button
+          type="submit"
+          id="feedbackForm"
+          className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
+          bg-[#ad1fea] rounded-[1rem] cursor-pointer
+          md:py-[1.25rem] md:px-[2.65rem] order-1
+          md:text-[1.4rem]"
+        >
+          {isEdit ? "Save Changes" : "Add Feedback"}
+        </button>
+        <button
+          className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
+      bg-[#3a4374] rounded-[1rem] cursor-pointer
+      md:py-[1.25rem] md:px-[2.4rem] md:text-[1.4rem]"
+          onClick={goBack}
+        >
+          Cancel
+        </button>
+      </div>
       {isEdit ? (
         <button
           className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
-      bg-[#d73737] rounded-[1rem] cursor-pointer"
+      bg-[#d73737] rounded-[1rem] cursor-pointer
+      md:order-1 md:py-[1.25rem] md:px-[2.65rem] md:text-[1.4rem]"
           onClick={handleDelete}
         >
           Delete

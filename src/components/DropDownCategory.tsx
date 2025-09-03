@@ -16,10 +16,13 @@ export default function DropDownCategory({
   return (
     <div className="relative">
       <div className="flex flex-col mb-[1.6rem]">
-        <h1 className="text-[1.3rem] text-[#3a4374] font-bold tracking-[-0.181px]">
+        <h1
+          className="text-[1.3rem] text-[#3a4374] font-bold tracking-[-0.181px]
+          md:text-[1.4rem] md:tracking-[-0.194px]"
+        >
           {type === "category" ? "Category" : "Update Status"}
         </h1>
-        <p className="text-[1.3rem] text-[#647196]">
+        <p className="text-[1.3rem] text-[#647196] md:text-[1.4rem]">
           {type === "category"
             ? "Choose a category for your feedback"
             : "Change feature state"}

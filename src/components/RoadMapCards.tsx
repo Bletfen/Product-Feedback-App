@@ -3,116 +3,137 @@ import { useUpVoteHandler } from "../context/FeedBacksContext";
 export default function RoadMapCards({
   data,
   color,
+  title,
 }: {
   data: TProductRequests[];
   color: string;
+  title: string;
 }) {
   const { upVotedIds, upVoteHandler } = useUpVoteHandler();
   return (
-    <div className="flex flex-col gap-[1.6rem]">
-      {data.map((item) => (
-        <div
-          className="px-[2.4rem] pt-[2.2rem] pb-[2.2rem]
-            bg-white rounded-[1rem] relative"
-        >
+    <div>
+      <div className="mt-[3.2rem] mb-[2.4rem] hidden md:block">
+        <h2 className="text-[1.4rem] text-[#3a4374] font-bold tracking-[-0.194px]">
+          {title} ({data.length})
+        </h2>
+        <p className="text-[1.4rem] text-[#647196]">
+          {title === "Planned"
+            ? "Ideas prioritized for research"
+            : title === "In-Progress"
+            ? "Currently being developed"
+            : "Released features"}
+        </p>
+      </div>
+      <div className="flex flex-col gap-[1.6rem]">
+        {data.map((item) => (
           <div
-            style={{ backgroundColor: color }}
-            className={` absolute top-0 left-0 h-[0.6rem] w-full
-                rounded-t-[0.5rem]`}
-          ></div>
-          <div className="flex items-center gap-[0.8rem]">
+            key={item.id}
+            className="px-[2.4rem] pt-[2.2rem] pb-[2.2rem]
+            bg-white rounded-[1rem] relative
+            md:px-[2rem] md:pt-[3rem] md:pb-[2.4rem]"
+          >
             <div
               style={{ backgroundColor: color }}
-              className={`w-[0.8rem] h-[0.8rem] rounded-full`}
+              className="absolute top-0 left-0 h-[0.6rem] w-full
+                rounded-t-[0.5rem]"
             ></div>
-            <span className="capitalize text-[#647196] text-[1.3rem]">
-              {item.status}
-            </span>
-          </div>
-          <div className="flex flex-col gap-[0.9rem]">
-            <h1
-              className="text-[#3a4374] text-[1.3rem] font-bold 
-            tracking-[-0.181px] mt-[1.6rem]"
-            >
-              {item.title}
-            </h1>
-            <p className="text-[1.3rem] text-[#647196]">{item.description}</p>
-            <div>
-              <span
-                className="
+            <div className="flex items-center gap-[0.8rem] md:gap-[1.6rem]">
+              <div
+                style={{ backgroundColor: color }}
+                className={`w-[0.8rem] h-[0.8rem] rounded-full`}
+              ></div>
+              <span className="capitalize text-[#647196] text-[1.3rem]">
+                {item.status}
+              </span>
+            </div>
+            <div className="flex flex-col gap-[0.9rem]">
+              <h1
+                className="text-[#3a4374] text-[1.3rem] font-bold 
+            tracking-[-0.181px] mt-[1.6rem] md:mt-[1.4rem]"
+              >
+                {item.title}
+              </h1>
+              <p className="text-[1.3rem] text-[#647196] break-words">
+                {item.description}
+              </p>
+              <div>
+                <span
+                  className="
                       px-[1.6rem] py-[0.6rem]
                       inline-block capitalize text-[1.3rem]
                       font-semibold text-[#4661e6]
-                      bg-[#f2f4ff] rounded-[1rem]"
-              >
-                {item.category}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <div
-                className={`flex items-center gap-[1rem]
+                      bg-[#f2f4ff] rounded-[1rem]
+                      mt-[1.5rem]"
+                >
+                  {item.category}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <div
+                  className={`flex items-center gap-[1rem]
                 pl-[1.6rem] pr-[1.3rem] py-[0.7rem] rounded-[1rem]
                 cursor-pointer hover:bg-[#cfd7ff]
                 transition-all duration-300
                 ${
                   upVotedIds.includes(item.id) ? "bg-[#4661e6]" : "bg-[#f2f4f3]"
                 }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  upVoteHandler(item.id);
-                }}
-              >
-                <svg
-                  width="9"
-                  height="7"
-                  viewBox="0 0 9 7"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`${
-                    upVotedIds.includes(item.id)
-                      ? "stroke-white"
-                      : "stroke-[#4661E6]"
-                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    upVoteHandler(item.id);
+                  }}
                 >
-                  <path d="M0 6L4 2L8 6" strokeWidth="2" />
-                </svg>
-                <span
-                  className={`text-[1.3rem] font-bold
+                  <svg
+                    width="9"
+                    height="7"
+                    viewBox="0 0 9 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`${
+                      upVotedIds.includes(item.id)
+                        ? "stroke-white"
+                        : "stroke-[#4661E6]"
+                    }`}
+                  >
+                    <path d="M0 6L4 2L8 6" strokeWidth="2" />
+                  </svg>
+                  <span
+                    className={`text-[1.3rem] font-bold
                   tracking-[-0.181px]
                   ${
                     upVotedIds.includes(item.id)
                       ? "text-white"
                       : "text-[#3a4374]"
                   }`}
-                >
-                  {item.upvotes}
-                </span>
-              </div>
-              <div className="flex items-center gap-[0.2rem]">
-                <svg
-                  width="18"
-                  height="16"
-                  viewBox="0 0 18 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2.62074 16H1.34534L2.24718 15.0895C2.73344 14.5986 3.0371 13.9601 3.11873 13.2674C1.03637 11.8878 0 9.88917 0 7.79388C0 3.92832 3.51913 0 9.0305 0C14.8692 0 18 3.61479 18 7.45522C18 11.321 14.8361 14.9333 9.0305 14.9333C8.0135 14.9333 6.95226 14.7963 6.00478 14.5448C5.10787 15.4735 3.89262 16 2.62074 16Z"
-                    fill="#CDD2EE"
-                  />
-                </svg>
-                <span
-                  className={`text-[1.3rem] font-bold
+                  >
+                    {item.upvotes}
+                  </span>
+                </div>
+                <div className="flex items-center gap-[0.2rem]">
+                  <svg
+                    width="18"
+                    height="16"
+                    viewBox="0 0 18 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.62074 16H1.34534L2.24718 15.0895C2.73344 14.5986 3.0371 13.9601 3.11873 13.2674C1.03637 11.8878 0 9.88917 0 7.79388C0 3.92832 3.51913 0 9.0305 0C14.8692 0 18 3.61479 18 7.45522C18 11.321 14.8361 14.9333 9.0305 14.9333C8.0135 14.9333 6.95226 14.7963 6.00478 14.5448C5.10787 15.4735 3.89262 16 2.62074 16Z"
+                      fill="#CDD2EE"
+                    />
+                  </svg>
+                  <span
+                    className={`text-[1.3rem] font-bold
                   tracking-[-0.181px] text-[#3a4374]
                   ${item.comments ? "opacity-[1]" : "opacity-[0.5]"}`}
-                >
-                  {item.comments?.length ? item.comments.length : "0"}
-                </span>
+                  >
+                    {item.comments?.length ? item.comments.length : "0"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
