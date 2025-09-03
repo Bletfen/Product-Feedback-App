@@ -35,7 +35,6 @@ export default function FeedBacks() {
         return 0;
     }
   });
-  console.log(finalData.length);
 
   return (
     <>

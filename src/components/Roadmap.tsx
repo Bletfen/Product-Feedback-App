@@ -55,8 +55,8 @@ export default function Roadmap() {
         className="flex flex-col gap-[0.8rem]
         text-[1.6rem] text-[#647196]"
       >
-        {roadMapArray.map((item) => (
-          <div className="flex items-center justify-between">
+        {roadMapArray.map((item, index) => (
+          <div key={index} className="flex items-center justify-between">
             <div className="flex items-center gap-[1.6rem]">
               <div
                 className="w-[0.8rem] h-[0.8rem] rounded-full"

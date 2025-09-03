@@ -31,7 +31,7 @@ export default function FeedBack() {
       ...prev,
       productRequests: prev.productRequests.map((req) =>
         req.id === feed.id
-          ? { ...req, comments: [...req.comments, newComment] }
+          ? { ...req, comments: [...(req.comments ?? []), newComment] }
           : req
       ),
     }));

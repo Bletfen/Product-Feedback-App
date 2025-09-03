@@ -44,7 +44,7 @@ export default function RoadMapPage() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M4 9L0 5L4 1" stroke="#CDD2EE" stroke-width="2" />
+              <path d="M4 9L0 5L4 1" stroke="#CDD2EE" strokeWidth="2" />
             </svg>
             <span
               className="text-[1.3rem] text-white

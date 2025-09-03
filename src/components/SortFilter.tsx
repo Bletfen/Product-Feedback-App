@@ -22,6 +22,7 @@ export default function SortFilter({
     >
       {sortArray.map((item, index) => (
         <div
+          key={item}
           className="flex flex-col gap-[1.2rem]"
           onClick={() => setSort(item)}
         >
