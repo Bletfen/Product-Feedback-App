@@ -27,14 +27,16 @@ export default function EditButtons({
           className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
           bg-[#ad1fea] rounded-[1rem] cursor-pointer
           md:py-[1.25rem] md:px-[2.65rem] order-1
-          md:text-[1.4rem]"
+          md:text-[1.4rem]
+          transition-all duration-300 hover:bg-[#c76af6]"
         >
           {isEdit ? "Save Changes" : "Add Feedback"}
         </button>
         <button
           className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
       bg-[#3a4374] rounded-[1rem] cursor-pointer
-      md:py-[1.25rem] md:px-[2.4rem] md:text-[1.4rem]"
+      md:py-[1.25rem] md:px-[2.4rem] md:text-[1.4rem]
+      transition-all duration-300 hover:bg-[#656ea3]"
           onClick={goBack}
         >
           Cancel
@@ -44,7 +46,8 @@ export default function EditButtons({
         <button
           className="py-[1.05rem] text-[#f2f4fe] text-[1.3rem] font-bold
       bg-[#d73737] rounded-[1rem] cursor-pointer
-      md:order-1 md:py-[1.25rem] md:px-[2.65rem] md:text-[1.4rem]"
+      md:order-1 md:py-[1.25rem] md:px-[2.65rem] md:text-[1.4rem]
+      transition-all duration-300 hover:bg-[#e98888]"
           onClick={handleDelete}
         >
           Delete

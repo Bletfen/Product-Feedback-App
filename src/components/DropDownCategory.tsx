@@ -12,7 +12,7 @@ export default function DropDownCategory({
   const options =
     type === "category"
       ? ["Feature", "UI", "UX", "Enhancement", "Bug"]
-      : ["Planned", "In-Progress", "Live"];
+      : ["Suggestion", "Planned", "In-Progress", "Live"];
   return (
     <div className="relative">
       <div className="flex flex-col mb-[1.6rem]">

@@ -14,7 +14,8 @@ export default function FeedBacks() {
   const { sortIsOpen, setSortIsOpen } = useSort();
   const [sort, setSort] = useState<string>("Most Upvotes");
   const FilteredData = data.productRequests.filter((item) => {
-    return filter.toLowerCase() === "all"
+    return filter.toLowerCase() === "all" &&
+      item.status.toLowerCase() === "suggestion"
       ? true
       : item.category.toLowerCase() === filter.toLocaleLowerCase();
   });

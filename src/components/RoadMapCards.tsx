@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useUpVoteHandler } from "../context/FeedBacksContext";
 
 export default function RoadMapCards({
@@ -13,10 +14,16 @@ export default function RoadMapCards({
   return (
     <div>
       <div className="mt-[3.2rem] mb-[2.4rem] hidden md:block">
-        <h2 className="text-[1.4rem] text-[#3a4374] font-bold tracking-[-0.194px]">
+        <h2
+          className="text-[1.4rem] text-[#3a4374] font-bold tracking-[-0.194px]
+          xl:text-[1.8rem]"
+        >
           {title} ({data.length})
         </h2>
-        <p className="text-[1.4rem] text-[#647196]">
+        <p
+          className="text-[1.4rem] text-[#647196]
+        xl:text-[1.6rem]"
+        >
           {title === "Planned"
             ? "Ideas prioritized for research"
             : title === "In-Progress"
@@ -43,18 +50,27 @@ export default function RoadMapCards({
                 style={{ backgroundColor: color }}
                 className={`w-[0.8rem] h-[0.8rem] rounded-full`}
               ></div>
-              <span className="capitalize text-[#647196] text-[1.3rem]">
+              <span
+                className="capitalize text-[#647196] text-[1.3rem]
+              xl:text-[1.6rem]"
+              >
                 {item.status}
               </span>
             </div>
             <div className="flex flex-col gap-[0.9rem]">
-              <h1
+              <Link
+                to={`/suggestion/${item.id}`}
                 className="text-[#3a4374] text-[1.3rem] font-bold 
-            tracking-[-0.181px] mt-[1.6rem] md:mt-[1.4rem]"
+            tracking-[-0.181px] mt-[1.6rem] md:mt-[1.4rem]
+            hover:text-[#4661e6] transition-all duration-300
+            xl:text-[1.8rem]"
               >
                 {item.title}
-              </h1>
-              <p className="text-[1.3rem] text-[#647196] break-words">
+              </Link>
+              <p
+                className="text-[1.3rem] text-[#647196] break-words
+                xl:text-[1.6rem]"
+              >
                 {item.description}
               </p>
               <div>
@@ -109,7 +125,10 @@ export default function RoadMapCards({
                     {item.upvotes}
                   </span>
                 </div>
-                <div className="flex items-center gap-[0.2rem]">
+                <div
+                  className="flex items-center gap-[0.2rem]
+                xl:gap-[0.8rem]"
+                >
                   <svg
                     width="18"
                     height="16"
@@ -124,7 +143,7 @@ export default function RoadMapCards({
                   </svg>
                   <span
                     className={`text-[1.3rem] font-bold
-                  tracking-[-0.181px] text-[#3a4374]
+                  tracking-[-0.181px] text-[#3a4374] md:text-[1.6rem]
                   ${item.comments ? "opacity-[1]" : "opacity-[0.5]"}`}
                   >
                     {item.comments?.length ? item.comments.length : "0"}
