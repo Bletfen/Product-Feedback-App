@@ -12,7 +12,7 @@ export default function MainHeader({
   sortIsOpen: boolean;
   sort: string;
   children: ReactNode;
-  finalData: IProductRequests[];
+  finalData: TProductRequests[];
 }) {
   return (
     <div
@@ -20,7 +20,7 @@ export default function MainHeader({
             flex items-center justify-between
             md:mt-[4rem] md:rounded-[1rem]
             md:py-[1.4rem] md:px-[unset] md:pl-[2.4rem] md:pr-[1.2rem]
-            md:max-w-[82.5rem] md:mx-auto"
+            "
     >
       <div className="relative flex items-center gap-[3.8rem]">
         <div className="hidden md:flex items-center gap-[1.6rem]">
@@ -49,7 +49,7 @@ export default function MainHeader({
         </div>
         <div
           className="flex items-center gap-[0.8rem]
-                text-[#f2f4fe] text-[1.3rem]"
+                text-[#f2f4fe] text-[1.3rem] md:text-[1.4rem]"
           onClick={() => setSortIsOpen((prev) => !prev)}
         >
           <p className="font-bold">

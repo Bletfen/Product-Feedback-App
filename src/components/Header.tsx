@@ -2,27 +2,36 @@ import { useState } from "react";
 import FilterByCategory from "./FilterByCategory";
 import Roadmap from "./Roadmap";
 import { useSort } from "../context/FeedBacksContext";
+import { Link } from "react-router-dom";
 export default function Header() {
   const { setSortIsOpen } = useSort();
   const [isHamburgerMenu, setIsHamburgerMenu] = useState<boolean>(false);
   return (
     <div
-      className="relative md:grid grid-cols-3 gap-[1rem]
-        md:px-[4rem] md:pt-[5.6rem]
-        md:max-w-[82.5rem] md:mx-auto"
+      className="relative md:grid grid-cols-3 
+        md:pt-[5.6rem] md:px-[4rem] gap-[1rem]
+        md:justify-items-center"
       onClick={() => setSortIsOpen(false)}
     >
       <div
         className="bg-[radial-gradient(166.82%_166.82%_at_103.9%_-10.39%,_#E84D70_0%,_#A337F6_53.09%,_#28A7ED_100%)]
       flex items-center justify-between py-[1.6rem] px-[2.4rem]
       md:rounded-[1rem] md:items-end md:py-[unset] md:pb-[2.4rem]
-      transition-all duration-300 md:max-w-[25.5rem]
+      transition-all duration-300 md:max-w-[25.5rem] h-full
+      w-full
       "
       >
-        <div className="text-white">
-          <h1 className="text-[1.5rem] font-bold">Frontend Mentor</h1>
-          <p className="text-[1.3rem] font-medium">Feedback Board</p>
-        </div>
+        <Link to={"/"} className="text-white">
+          <h1
+            className="text-[1.5rem] font-bold md:text-[2rem]
+            tracking-[-0.187px] md:tracking-[-0.25px]"
+          >
+            Frontend Mentor
+          </h1>
+          <p className="text-[1.3rem] font-medium md:text-[1.5rem]">
+            Feedback Board
+          </p>
+        </Link>
         {!isHamburgerMenu ? (
           <svg
             width="20"

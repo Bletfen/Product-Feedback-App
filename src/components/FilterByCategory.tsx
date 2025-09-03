@@ -14,8 +14,8 @@ export default function FilterByCategory() {
       {categoryArray.map((cat) => (
         <div
           key={cat}
-          className={`py-[0.5rem] px-[1.6rem] rounded-[1rem] cursor-pointer
-            transition-all duration-300 hover:bg-[#cfd7ff]
+          className={`py-[0.6rem] px-[1.6rem] rounded-[1rem] cursor-pointer
+            transition-all duration-300 hover:bg-[#cfd7ff] flex items-center
             ${filter === cat ? "bg-[#4661e6]" : "bg-[#f2f4ff]"}`}
           onClick={() => setFilter(cat)}
         >

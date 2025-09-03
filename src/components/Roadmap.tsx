@@ -33,6 +33,7 @@ export default function Roadmap() {
       className="px-[2.4rem] pt-[1.9rem] pb-[2.4rem] bg-white 
     rounded-[1rem] flex flex-col gap-[2.4rem]
     transition-all duration-300 max-w-[25.5rem]
+    w-full
     "
     >
       <div className="flex items-center gap-[6.7rem]">
@@ -64,7 +65,7 @@ export default function Roadmap() {
               <p>{item.label}</p>
             </div>
             <div>
-              <span>{item.length}</span>
+              <span className="font-bold">{item.length}</span>
             </div>
           </div>
         ))}
