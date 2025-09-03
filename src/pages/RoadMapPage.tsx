@@ -23,7 +23,8 @@ export default function RoadMapPage() {
   return (
     <div
       className="pb-[9.8rem]
-    md:pt-[5.6rem] md:px-[4rem]"
+    md:pt-[5.6rem] md:px-[4rem]
+    xl:max-w-[111rem] xl:mx-auto"
     >
       <div
         className="flex justify-between bg-[#373f68]
@@ -120,7 +121,7 @@ export default function RoadMapPage() {
           <RoadMapCards data={liveData} color={"#62bcfa"} title={"Live"} />
         )}
       </div>
-      <div className="hidden md:grid grid-cols-3 gap-[1rem]">
+      <div className="hidden md:grid grid-cols-3 gap-[1rem] xl:gap-[3rem]">
         <RoadMapCards data={plannedData} color={"#f49f85"} title={"Planned"} />
         <RoadMapCards
           data={inProgressData}

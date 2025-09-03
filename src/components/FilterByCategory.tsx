@@ -8,7 +8,7 @@ export default function FilterByCategory() {
     px-[2.4rem]
     flex flex-wrap gap-[0.8rem]
     transition-all duration-300
-    max-w-[25.5rem]
+    max-w-[25.5rem] xl:h-[16.6rem] xl:w-[25.5rem]
     "
     >
       {categoryArray.map((cat) => (

@@ -17,7 +17,7 @@ export default function SortFilter({
     <div
       className="absolute top-20 flex flex-col gap-[1.2rem]
         rounded-[1rem] bg-white shadow-[0_10px_40px_-7px_rgba(55,63,104,0.35)]
-        py-[1.2rem] w-[25.5rem]
+        py-[1.2rem] w-[25.5rem] md:left-77 md:top-22
     "
     >
       {sortArray.map((item, index) => (

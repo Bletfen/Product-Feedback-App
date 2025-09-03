@@ -33,10 +33,10 @@ export default function Roadmap() {
       className="px-[2.4rem] pt-[1.9rem] pb-[2.4rem] bg-white 
     rounded-[1rem] flex flex-col gap-[2.4rem]
     transition-all duration-300 max-w-[25.5rem]
-    w-full
+    w-full xl:h-[17.8rem] xl:w-[25.5rem]
     "
     >
-      <div className="flex items-center gap-[6.7rem]">
+      <div className="flex items-center gap-[6.7rem] xl:justify-between">
         <h1
           className="text-[1.8rem] font-bold tracking-[-0.25px]
             text-[#3a4374]"
@@ -46,7 +46,7 @@ export default function Roadmap() {
         <Link
           to={"roadmap"}
           className="underline text-[1.3rem] font-semibold
-            text-[#4661e6]"
+            text-[#4661e6] hover:text-[#8397f8] transition-all duration-300"
         >
           View
         </Link>

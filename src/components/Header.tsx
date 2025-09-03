@@ -10,7 +10,8 @@ export default function Header() {
     <div
       className="relative md:grid grid-cols-3 
         md:pt-[5.6rem] md:px-[4rem] gap-[1rem]
-        md:justify-items-center"
+        md:justify-items-center xl:flex xl:flex-col
+        xl:gap-[2.4rem] xl:p-[unset]"
       onClick={() => setSortIsOpen(false)}
     >
       <div
@@ -18,7 +19,7 @@ export default function Header() {
       flex items-center justify-between py-[1.6rem] px-[2.4rem]
       md:rounded-[1rem] md:items-end md:py-[unset] md:pb-[2.4rem]
       transition-all duration-300 md:max-w-[25.5rem] h-full
-      w-full
+      w-full xl:h-[13.7rem] xl:w-[25.5rem]
       "
       >
         <Link to={"/"} className="text-white">

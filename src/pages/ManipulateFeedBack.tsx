@@ -24,7 +24,11 @@ export default function ManipulateFeedBack() {
     feedBack?.category ?? "Feature"
   );
   const [status, setStatus] = useState<string>(feedBack?.status ?? "Planned");
-  const { register, handleSubmit } = useForm<{
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{
     title: string;
     description: string;
   }>();
@@ -98,8 +102,8 @@ export default function ManipulateFeedBack() {
           >
             <circle cx="28" cy="28" r="28" fill="url(#paint0_radial_0_801)" />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M29.0825 19.4809L32.8315 16L39.345 22.2719L35.7969 25.952L29.0825 19.4809ZM16 39.5949C16.9207 35.6533 19.4867 25.5743 19.4867 25.5743L27.6895 20.7535L34.5209 27.1499L29.3017 34.97L16.313 40L22.4703 34.2104C23.513 34.5998 24.9857 34.2478 25.7818 33.3736C26.8328 32.2255 26.7539 30.4423 25.605 29.3914C24.456 28.3404 22.5848 28.3404 21.5339 29.4885C20.751 30.3444 20.4812 31.8544 20.9287 32.8498L16 39.5949Z"
               fill="white"
             />
@@ -112,9 +116,9 @@ export default function ManipulateFeedBack() {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(58.184 -5.81647) rotate(129.411) scale(93.4169)"
               >
-                <stop stop-color="#E84D70" />
-                <stop offset="0.530886" stop-color="#A337F6" />
-                <stop offset="1" stop-color="#28A7ED" />
+                <stop stopColor="#E84D70" />
+                <stop offset="0.530886" stopColor="#A337F6" />
+                <stop offset="1" stopColor="#28A7ED" />
               </radialGradient>
             </defs>
           </svg>
@@ -141,9 +145,9 @@ export default function ManipulateFeedBack() {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(41.56 -4.15462) rotate(129.411) scale(66.7263)"
               >
-                <stop stop-color="#E84D70" />
-                <stop offset="0.530886" stop-color="#A337F6" />
-                <stop offset="1" stop-color="#28A7ED" />
+                <stop stopColor="#E84D70" />
+                <stop offset="0.530886" stopColor="#A337F6" />
+                <stop offset="1" stopColor="#28A7ED" />
               </radialGradient>
             </defs>
           </svg>
@@ -165,7 +169,8 @@ export default function ManipulateFeedBack() {
             label={"Add a short, descriptive headline"}
             feedBackFunc={feedBackFunc}
             isEdit={isEdit}
-            register={register("title", { required: true })}
+            register={register("title", { required: "Can't be empty" })}
+            error={errors.title}
           />
           <DropDownCategory
             type={"category"}
@@ -187,7 +192,8 @@ export default function ManipulateFeedBack() {
             }
             feedBackFunc={feedBackFunc}
             isEdit={isEdit}
-            register={register("description", { required: true })}
+            register={register("description", { required: "Can't be empty" })}
+            error={errors.description}
           />
           <EditButtons isEdit={isEdit} handleDelete={handleDelete} />
         </form>

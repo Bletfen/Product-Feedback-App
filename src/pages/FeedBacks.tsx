@@ -38,7 +38,7 @@ export default function FeedBacks() {
 
   return (
     <>
-      <div className="md:px-[4rem]">
+      <div className="md:px-[4rem] xl:p-[unset]">
         <MainHeader
           setSortIsOpen={setSortIsOpen}
           sortIsOpen={sortIsOpen}

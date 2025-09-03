@@ -1,3 +1,5 @@
+import type { FieldError } from "react-hook-form";
+
 export default function Input({
   type,
   title,
@@ -5,6 +7,7 @@ export default function Input({
   feedBackFunc,
   isEdit,
   register,
+  error,
 }: {
   type: "input" | "textarea";
   title: string;
@@ -12,6 +15,7 @@ export default function Input({
   feedBackFunc: () => any;
   isEdit: boolean;
   register: any;
+  error?: FieldError;
 }) {
   const feedback = feedBackFunc();
   return (
@@ -34,22 +38,29 @@ export default function Input({
           type="text"
           id="headline"
           defaultValue={isEdit ? feedback.title : ""}
-          className="py-[1.5rem] px-[1.6rem] text-[1.3rem]
+          className={`py-[1.5rem] px-[1.6rem] text-[1.3rem]
                 text-[#3a4374] outline-none bg-[#f7f8fd]
                 rounded-[0.5rem] md:text-[1.5rem]
-                md:py-[1.3rem] md:px-[2.4rem]"
+                md:py-[1.3rem] md:px-[2.4rem]
+                transtion-all duration-300
+                border focus:border focus:border-[#4661e6]
+                ${error ? "border-[#d73737]" : "border-transparent"}`}
         />
       ) : (
         <textarea
           {...register}
-          className="w-full py-[1.6rem] pl-[1.6rem] pr-[2.4rem] 
+          className={`w-full py-[1.6rem] pl-[1.6rem] pr-[2.4rem] 
           bg-[#f7f8fd] resize-none rounded-[0.5rem] outline-none 
           mb-[1.6rem] text-[1.3rem] text-[#3a4374] md:text-[1.5rem]
-          md:py-[1.3rem] md:px-[2.4rem]"
+          md:py-[1.3rem] md:px-[2.4rem] transtion-all duration-300
+          border
+          focus:border focus:border-[#4661e6]
+          ${error ? "border-[#d73737]" : "border-transparent"}`}
           maxLength={250}
           defaultValue={isEdit ? feedback.description : ""}
         ></textarea>
       )}
+      {error && <p className="text-[1.4rem] text-[#d73737]">{error.message}</p>}
     </div>
   );
 }

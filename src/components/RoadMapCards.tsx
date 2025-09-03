@@ -24,13 +24,14 @@ export default function RoadMapCards({
             : "Released features"}
         </p>
       </div>
-      <div className="flex flex-col gap-[1.6rem]">
+      <div className="flex flex-col gap-[1.6rem] xl:gap-[2.4rem]">
         {data.map((item) => (
           <div
             key={item.id}
             className="px-[2.4rem] pt-[2.2rem] pb-[2.2rem]
             bg-white rounded-[1rem] relative
-            md:px-[2rem] md:pt-[3rem] md:pb-[2.4rem]"
+            md:px-[2rem] md:pt-[3rem] md:pb-[2.4rem]
+            xl:px-[3.2rem] xl:pt-[3.8rem] xl:pb-[3.2rem]"
           >
             <div
               style={{ backgroundColor: color }}

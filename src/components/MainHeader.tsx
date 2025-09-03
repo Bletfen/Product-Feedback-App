@@ -20,7 +20,7 @@ export default function MainHeader({
             flex items-center justify-between
             md:mt-[4rem] md:rounded-[1rem]
             md:py-[1.4rem] md:px-[unset] md:pl-[2.4rem] md:pr-[1.2rem]
-            "
+            xl:w-[82.5rem] xl:mt-[unset]"
     >
       <div className="relative flex items-center gap-[3.8rem]">
         <div className="hidden md:flex items-center gap-[1.6rem]">
@@ -49,21 +49,34 @@ export default function MainHeader({
         </div>
         <div
           className="flex items-center gap-[0.8rem]
-                text-[#f2f4fe] text-[1.3rem] md:text-[1.4rem]"
+                text-[#f2f4fe] text-[1.3rem] md:text-[1.4rem]
+                cursor-pointer"
           onClick={() => setSortIsOpen((prev) => !prev)}
         >
           <p className="font-bold">
             <span className="font-normal">Sort By : </span> {sort}
           </p>
-          <svg
-            width="9"
-            height="7"
-            viewBox="0 0 9 7"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M1 1L5 5L9 1" stroke="white" strokeWidth="2" />
-          </svg>
+          {!sortIsOpen ? (
+            <svg
+              width="9"
+              height="7"
+              viewBox="0 0 9 7"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 1L5 5L9 1" stroke="white" strokeWidth="2" />
+            </svg>
+          ) : (
+            <svg
+              width="9"
+              height="7"
+              viewBox="0 0 9 7"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 6L5 2L9 6" stroke="white" stroke-width="2" />
+            </svg>
+          )}
         </div>
         {sortIsOpen ? children : null}
       </div>

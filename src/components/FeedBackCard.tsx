@@ -7,9 +7,6 @@ export default function FeedBackCard({
 }) {
   const { upVotedIds, upVoteHandler } = useUpVoteHandler();
 
-  // გავჩერდი აქ კარტებს ვაკეთებდი, კომპონენტის შემოკლება მინდოდა მაგრამ
-  // დაიკიდე ეგ.
-
   return (
     <Link
       to={`/suggestion/${feedback.id}`}

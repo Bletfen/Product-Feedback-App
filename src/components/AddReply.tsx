@@ -54,7 +54,10 @@ export default function AddReply({
         placeholder="Type your comment here"
         className="w-full p-[1.6rem] bg-[#f7f8fd] resize-none
             rounded-[0.5rem] outline-none mb-[1.6rem]
-            text-[1.6rem] text-[#8c92b3]"
+            text-[1.6rem] text-[#8c92b3]
+            transtion-all duration-300
+            border border-transparent
+            focus:border focus:border-[#4661e6]"
         value={reply}
         maxLength={250}
         onChange={(e) => setReply(e.target.value)}
@@ -64,7 +67,8 @@ export default function AddReply({
         type="submit"
         className="shrink-0 px-[2.4rem] py-[1.25rem]
         bg-[#ad1fea] rounded-[1rem] text-[#f2f4fe] text-[1.4rem]
-        font-bold cursor-pointer"
+        font-bold cursor-pointer
+        transtion-all duration-300 hover:bg-[#c75af6]"
       >
         Post Reply
       </button>
